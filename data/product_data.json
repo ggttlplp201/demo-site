@@ -16,7 +16,7 @@
     },
     {
       "id": "rodapes",
-      "name": "Rodápés"
+      "name": "Rodapés"
     },
     {
       "id": "carpintaria",
@@ -668,7 +668,7 @@
           "24°",
           "36°",
           "48°",
-          "10535°"
+          "10×35°"
         ],
         "cri": 80,
         "ip_rating": 20,
@@ -1805,7 +1805,7 @@
     {
       "id": "luminaria-led-ampla-downlight",
       "category": "iluminacao-led",
-      "name": "Lumiária LED Ampla (downlight)",
+      "name": "Luminária LED Ampla (downlight)",
       "ref_prefix": "DMRS-",
       "description_pt": "PLACEHOLDER",
       "description_en": "PLACEHOLDER",
@@ -1990,7 +1990,7 @@
     {
       "id": "luminaria-led-embutida-ip65",
       "category": "iluminacao-led",
-      "name": "Lumiária LED Embutida IP65",
+      "name": "Luminária LED Embutida IP65",
       "ref_prefix": "DMSL-",
       "description_pt": "PLACEHOLDER",
       "description_en": "PLACEHOLDER",
@@ -2182,7 +2182,7 @@
     {
       "id": "luminaria-led-embutida-ip20",
       "category": "iluminacao-led",
-      "name": "Lumiária LED Embutida IP20",
+      "name": "Luminária LED Embutida IP20",
       "ref_prefix": "DMRS-",
       "description_pt": "PLACEHOLDER",
       "description_en": "PLACEHOLDER",
@@ -4450,7 +4450,7 @@
         "nominal_width_mm": 900,
         "leaf_thickness_mm": 41,
         "min_wall_mm": 100,
-        "includes": "puxadores/fechadura/dobraças"
+        "includes": "puxadores/fechadura/dobradiças"
       },
       "variants": [
         {
@@ -4616,7 +4616,7 @@
         "nominal_width_mm": 900,
         "leaf_thickness_mm": 41,
         "min_wall_mm": 100,
-        "includes": "puxadores/fechadura/dobraças"
+        "includes": "puxadores/fechadura/dobradiças"
       },
       "variants": [
         {
@@ -4782,7 +4782,7 @@
         "nominal_width_mm": 900,
         "leaf_thickness_mm": 41,
         "min_wall_mm": 100,
-        "includes": "puxadores/fechadura/dobraças"
+        "includes": "puxadores/fechadura/dobradiças"
       },
       "variants": [
         {
