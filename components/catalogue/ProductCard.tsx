@@ -14,6 +14,7 @@ import { SaveButton } from "./SaveButton";
 import { DownloadMenu } from "./DownloadMenu";
 import { useCompare } from "@/state/compare";
 import { useAnalytics } from "@/state/analytics";
+import { useRouter } from "next/navigation";
 import { useT, useLocale } from "@/state/locale";
 import { localizedName } from "@/lib/i18n";
 import type { Product } from "@/lib/types";
@@ -54,6 +55,7 @@ export function ProductCard({ product }: { product: Product }) {
   const t = useT();
   const { locale } = useLocale();
   const inCompare = has(product.id);
+  const router = useRouter();
 
   const firstRef = product.variants[0]?.ref ?? "";
   const price = formatPrice(commercial.unit_prices[firstRef], commercial.currency, t("fb.price"));
@@ -128,9 +130,18 @@ export function ProductCard({ product }: { product: Product }) {
           )}
           {/* 3D badge on hover */}
           {hasRealValue(product.model3d) && (
-            <div className="absolute right-2 top-2 opacity-0 transition-opacity group-hover:opacity-100">
+            <button
+              type="button"
+              aria-label={t("card.view3d")}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                router.push(`/products/${product.id}?view=3d`);
+              }}
+              className="absolute right-2 top-2 opacity-0 transition-opacity group-hover:opacity-100 cursor-pointer"
+            >
               <Badge>{t("card.view3d")}</Badge>
-            </div>
+            </button>
           )}
           {/* Prev/Next arrows — only when >1 image */}
           {hasMultipleImages && (

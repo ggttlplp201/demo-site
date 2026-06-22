@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Nav } from "@/components/nav/Nav";
 import { Footer } from "@/components/Footer";
 import { DetailView } from "@/components/detail/DetailView";
@@ -15,7 +16,9 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     <>
       <Nav />
       <main className="mx-auto max-w-[1440px] px-6 py-8">
-        <DetailView productId={id} />
+        <Suspense fallback={null}>
+          <DetailView productId={id} />
+        </Suspense>
       </main>
       <Footer />
     </>

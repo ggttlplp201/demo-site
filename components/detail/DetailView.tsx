@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { repo } from "@/lib/repository";
 import { hasRealValue } from "@/lib/placeholder";
 import { ModelViewer } from "./ModelViewer";
@@ -26,6 +27,7 @@ interface DetailViewProps {
 
 export function DetailView({ productId }: DetailViewProps) {
   const product = repo.getProduct(productId);
+  const searchParams = useSearchParams();
 
   const modelAvailable = hasRealValue(product?.model3d);
 
@@ -33,7 +35,7 @@ export function DetailView({ productId }: DetailViewProps) {
     () => product?.variants[0]?.ref ?? ""
   );
   const [viewMode, setViewMode] = useState<"rendered" | "model">(
-    () => (modelAvailable ? "model" : "rendered")
+    () => (searchParams.get("view") === "3d" && modelAvailable ? "model" : "rendered")
   );
   const analytics = useAnalytics();
   const { locale } = useLocale();
