@@ -1,5 +1,5 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { resolvePlaceholder } from "@/lib/placeholder";
+import { hasRealValue, resolvePlaceholder } from "@/lib/placeholder";
 import type { Product } from "@/lib/types";
 
 interface Props {
@@ -15,25 +15,27 @@ export function BimMetadataSummary({ product }: Props) {
     {
       label: "Dimensões",
       value: meta.dimensions
-        ? Object.entries(meta.dimensions)
-            .map(([k, v]) => `${k}: ${v}`)
-            .join(", ")
+        ? (() => {
+            const real = Object.entries(meta.dimensions).filter(([, v]) => hasRealValue(v));
+            return real.length > 0 ? real.map(([k, v]) => `${k}: ${v}`).join(", ") : "—";
+          })()
         : "—",
     },
     {
       label: "Materiais",
-      value:
-        Array.isArray(meta.materials) && meta.materials.length > 0
-          ? meta.materials.join(", ")
-          : "—",
+      value: hasRealValue(meta.materials)
+        ? (meta.materials as string[]).filter(hasRealValue).join(", ")
+        : "—",
     },
     {
       label: "Propriedades IFC",
       value: meta.ifc_properties
-        ? Object.entries(meta.ifc_properties)
-            .slice(0, 3)
-            .map(([k, v]) => `${k}: ${v}`)
-            .join("; ")
+        ? (() => {
+            const real = Object.entries(meta.ifc_properties)
+              .filter(([, v]) => hasRealValue(v))
+              .slice(0, 3);
+            return real.length > 0 ? real.map(([k, v]) => `${k}: ${v}`).join("; ") : "—";
+          })()
         : "—",
     },
     { label: "Versão", value: String(resolvePlaceholder(meta.version, "—")) },
