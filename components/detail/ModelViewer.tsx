@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useT } from "@/state/locale";
 
 interface ModelViewerProps {
   src: string;
@@ -9,6 +10,7 @@ interface ModelViewerProps {
 
 export function ModelViewer({ src, alt }: ModelViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const t = useT();
 
   useEffect(() => {
     import("@google/model-viewer");
@@ -45,18 +47,18 @@ export function ModelViewer({ src, alt }: ModelViewerProps) {
       />
       <div className="absolute bottom-3 right-3 flex gap-2">
         <button
-          aria-label="Reset camera"
+          aria-label={t("viewer.reset")}
           onClick={handleReset}
           className="rounded border border-aluminium bg-white px-2.5 py-1 text-xs text-ink hover:bg-neutral-fill"
         >
-          Reset
+          {t("viewer.reset")}
         </button>
         <button
-          aria-label="Toggle fullscreen"
+          aria-label={t("viewer.fullscreen")}
           onClick={handleFullscreen}
           className="rounded border border-aluminium bg-white px-2.5 py-1 text-xs text-ink hover:bg-neutral-fill"
         >
-          Fullscreen
+          {t("viewer.fullscreen")}
         </button>
       </div>
     </div>

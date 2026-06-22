@@ -4,12 +4,13 @@ import { Nav } from "@/components/nav/Nav";
 import { Footer } from "@/components/Footer";
 import { useCart } from "@/state/cart";
 import { buildBomLines } from "@/lib/bom";
-import { useT } from "@/state/locale";
+import { useT, useLocale } from "@/state/locale";
 
 export default function CartPage() {
   const { items, remove, setQty, clear, count } = useCart();
   const t = useT();
-  const lines = buildBomLines(items);
+  const { locale } = useLocale();
+  const lines = buildBomLines(items, { locale, priceFallback: t("fb.price") });
   const [submitted, setSubmitted] = useState(false);
 
   function handleSubmit() {
@@ -32,7 +33,7 @@ export default function CartPage() {
         {submitted && (
           <div className="rounded border border-aluminium bg-neutral-fill px-6 py-8 text-center">
             <p className="text-ink font-medium">{t("quote.requested")}</p>
-            <p className="mt-1 text-sm text-aluminium-dark">A nossa equipa entrará em contacto brevemente.</p>
+            <p className="mt-1 text-sm text-aluminium-dark">{t("quote.followUp")}</p>
           </div>
         )}
 

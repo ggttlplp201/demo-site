@@ -19,7 +19,7 @@ export function ViewModeToggle({ mode, onChange, modelAvailable }: ViewModeToggl
   const disabledBtn = "text-aluminium-dark opacity-40 cursor-not-allowed";
 
   return (
-    <div role="group" aria-label="Modo de visualização" className="flex border-b border-aluminium mb-4">
+    <div role="group" aria-label={t("view.modeLabel")} className="flex border-b border-aluminium mb-4">
       <button
         type="button"
         role="tab"

@@ -1,6 +1,7 @@
 "use client";
 
 import type { Variant } from "@/lib/types";
+import { useT } from "@/state/locale";
 
 interface VariantSelectorProps {
   variants: Variant[];
@@ -17,6 +18,7 @@ function variantLabel(variant: Variant): string {
 }
 
 export function VariantSelector({ variants, selectedRef, onSelect }: VariantSelectorProps) {
+  const t = useT();
   if (variants.length === 0) return null;
 
   if (variants.length === 1) {
@@ -33,7 +35,7 @@ export function VariantSelector({ variants, selectedRef, onSelect }: VariantSele
   }
 
   return (
-    <div className="flex gap-2 flex-wrap mt-3" role="group" aria-label="Variantes">
+    <div className="flex gap-2 flex-wrap mt-3" role="group" aria-label={t("variant.label")}>
       {variants.map((v) => {
         const isActive = v.ref === selectedRef;
         return (
