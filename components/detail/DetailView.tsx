@@ -14,6 +14,7 @@ import { CompliancePanel } from "./CompliancePanel";
 import { StandardSheet } from "./StandardSheet";
 import { InstallationDetails } from "./InstallationDetails";
 import { SupplyChainTimeline } from "./SupplyChainTimeline";
+import { OrderCalculator } from "@/components/calculator/OrderCalculator";
 
 interface DetailViewProps {
   productId: string;
@@ -55,6 +56,8 @@ export function DetailView({ productId }: DetailViewProps) {
             selectedRef={selectedRef}
             onSelect={setSelectedRef}
           />
+          {/* TASK 14: OrderCalculator */}
+          <OrderCalculator variantRef={selectedRef} />
         </div>
       </div>
 
@@ -75,7 +78,6 @@ export function DetailView({ productId }: DetailViewProps) {
         {/* TASK 14C */}
         <SupplyChainTimeline product={product} />
       </div>
-      {/* TASK 14: OrderCalculator */}
     </div>
   );
 }
