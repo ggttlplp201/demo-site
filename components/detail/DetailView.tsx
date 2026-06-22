@@ -16,6 +16,7 @@ import { InstallationDetails } from "./InstallationDetails";
 import { SupplyChainTimeline } from "./SupplyChainTimeline";
 import { OrderCalculator } from "@/components/calculator/OrderCalculator";
 import { useAnalytics } from "@/state/analytics";
+import { ViewModeToggle } from "./ViewModeToggle";
 
 interface DetailViewProps {
   productId: string;
@@ -24,8 +25,13 @@ interface DetailViewProps {
 export function DetailView({ productId }: DetailViewProps) {
   const product = repo.getProduct(productId);
 
+  const modelAvailable = hasRealValue(product?.model3d);
+
   const [selectedRef, setSelectedRef] = useState<string>(
     () => product?.variants[0]?.ref ?? ""
+  );
+  const [viewMode, setViewMode] = useState<"rendered" | "model">(
+    () => (modelAvailable ? "model" : "rendered")
   );
   const analytics = useAnalytics();
 
@@ -50,7 +56,12 @@ export function DetailView({ productId }: DetailViewProps) {
       <div className="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-8">
         {/* Left: 3D viewer or gallery */}
         <div>
-          {hasRealValue(product.model3d) ? (
+          <ViewModeToggle
+            mode={viewMode}
+            onChange={setViewMode}
+            modelAvailable={modelAvailable}
+          />
+          {viewMode === "model" && modelAvailable ? (
             // TODO: per-variant GLB models
             <ModelViewer src={product.model3d} alt={product.name} />
           ) : (
