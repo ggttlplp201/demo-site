@@ -83,7 +83,7 @@ export function CatalogueView() {
       {/* Results section */}
       <section className="px-9 pt-[34px] pb-24">
         {/* Results header */}
-        <div className="flex items-flex-end justify-between gap-5 flex-wrap mb-7">
+        <div className="flex items-end justify-between gap-5 flex-wrap mb-7">
           <div>
             <p className="font-mono text-[11.5px] tracking-[0.1em] uppercase text-[#8C8C84] mb-2">
               {t("cat.breadcrumb")}

@@ -18,8 +18,6 @@ export function SortDropdown({ value, onChange }: SortDropdownProps) {
     { value: "category", label: t("cat.sort.category") },
   ];
 
-  const currentLabel = SORT_OPTIONS.find(o => o.value === value)?.label ?? SORT_OPTIONS[0].label;
-
   return (
     <div className="relative">
       <select
