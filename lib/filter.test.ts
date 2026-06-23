@@ -28,6 +28,18 @@ describe("filterProducts", () => {
     expect(result.every(p => p.category === "espelhos")).toBe(true);
   });
 
+  it('Chinese query "镜" → mirror products (all category espelhos)', () => {
+    const result = filterProducts(repo.getProducts(), emptyFilters, "镜");
+    expect(result.length).toBeGreaterThan(0);
+    expect(result.every(p => p.category === "espelhos")).toBe(true);
+  });
+
+  it('English query "mirror" → mirror products', () => {
+    const result = filterProducts(repo.getProducts(), emptyFilters, "mirror");
+    expect(result.length).toBeGreaterThan(0);
+    expect(result.every(p => p.category === "espelhos")).toBe(true);
+  });
+
   it("facetOptions power contains 200 and is sorted ascending", () => {
     const { power } = facetOptions(repo.getProducts());
     expect(power).toContain(200);

@@ -1,4 +1,14 @@
 import type { Product } from "./types";
+import { repo } from "./repository";
+
+// category id -> all localized names (pt/en/zh) joined, for multilingual search
+const CATEGORY_SEARCH: Record<string, string> = (() => {
+  const m: Record<string, string> = {};
+  for (const c of repo.getCategories()) {
+    m[c.id] = `${c.name} ${c.name_en ?? ""} ${c.name_zh ?? ""}`.toLowerCase();
+  }
+  return m;
+})();
 
 export interface CatalogueFilters {
   category: string[];
@@ -32,7 +42,9 @@ export function filterProducts(products: Product[], f: CatalogueFilters, query: 
     if (f.colorTemp.length && !colorTempsOf(p).some(c => f.colorTemp.includes(c))) return false;
     if ((f.format ?? []).length && !p.bim_assets.some(a => (f.format ?? []).includes(a.format))) return false;
     if (q) {
-      const hay = `${p.name} ${p.category} ${p.ref_prefix} ${p.variants.map(v => v.ref).join(" ")}`.toLowerCase();
+      // Search across PT/EN/ZH product names + localized category names + refs,
+      // so a query in any language matches (e.g. "镜" / "mirror" / "espelho").
+      const hay = `${p.name} ${p.name_en ?? ""} ${p.name_zh ?? ""} ${p.category} ${CATEGORY_SEARCH[p.category] ?? ""} ${p.ref_prefix} ${p.variants.map(v => v.ref).join(" ")}`.toLowerCase();
       if (!hay.includes(q)) return false;
     }
     return true;
