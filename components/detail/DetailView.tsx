@@ -259,43 +259,45 @@ export function DetailView({ productId }: DetailViewProps) {
               </span>
             </div>
 
-            {/* Asset rows */}
-            {product.bim_assets.map((asset) => {
-              const localizedLabel = ASSET_LABEL_KEY[asset.label] ? t(ASSET_LABEL_KEY[asset.label]) : asset.label;
-              const meta = `${asset.format}${hasRealValue(asset.size) ? ` · ${asset.size}` : ""}`;
-              const isReal = hasRealValue(asset.file);
-              return (
-                <div key={asset.label + asset.format} className="flex items-center gap-[14px] px-5 py-[14px] border-b border-[#EFEEE8]">
-                  {/* Format badge */}
-                  <span className="font-mono text-[11px] font-medium text-[#17181C] bg-[#F6F5F0] border border-[#E6E5DE] rounded-[3px] px-2 py-[6px] min-w-[46px] text-center">{asset.format}</span>
-                  {/* Name + meta */}
-                  <div className="flex-1 min-w-0">
-                    <div className="text-[14.5px] font-medium text-[#17181C]">{localizedLabel}</div>
-                    <div className="text-[12px] text-[#8C8C84] mt-[2px]">{meta}</div>
+            {/* Asset rows — 2-column grid on md+ */}
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              {product.bim_assets.map((asset, idx) => {
+                const localizedLabel = ASSET_LABEL_KEY[asset.label] ? t(ASSET_LABEL_KEY[asset.label]) : asset.label;
+                const meta = `${asset.format}${hasRealValue(asset.size) ? ` · ${asset.size}` : ""}`;
+                const isReal = hasRealValue(asset.file);
+                return (
+                  <div key={asset.label + asset.format} className="flex items-center gap-[14px] px-5 py-3 border-b border-r border-[#EFEEE8] [&:nth-child(even)]:border-r-0 last:border-b-0 [&:nth-last-child(2):nth-child(odd)]:border-b-0">
+                    {/* Format badge */}
+                    <span className="font-mono text-[11px] font-medium text-[#17181C] bg-[#F6F5F0] border border-[#E6E5DE] rounded-[3px] px-2 py-[6px] min-w-[46px] text-center shrink-0">{asset.format}</span>
+                    {/* Name + meta */}
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[14.5px] font-medium text-[#17181C] truncate">{localizedLabel}</div>
+                      <div className="font-mono text-[12px] text-[#8C8C84] mt-[2px]">{meta}</div>
+                    </div>
+                    {/* Action */}
+                    {isReal ? (
+                      <a
+                        href={asset.file}
+                        download
+                        className="flex items-center gap-[7px] h-9 px-4 bg-[#DA1E28] text-white rounded-[4px] text-[13.5px] font-semibold hover:bg-[#B5161F] transition-colors shrink-0"
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                          <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/>
+                        </svg>
+                        {t("download.trigger") || "下载"}
+                      </a>
+                    ) : (
+                      <button
+                        type="button"
+                        className="flex items-center gap-[7px] h-9 px-4 bg-white text-[#17181C] border border-[#C9C8C0] rounded-[4px] text-[13.5px] font-medium hover:border-[#17181C] hover:bg-[#F6F5F0] transition-colors shrink-0"
+                      >
+                        {t("download.request")}
+                      </button>
+                    )}
                   </div>
-                  {/* Action */}
-                  {isReal ? (
-                    <a
-                      href={asset.file}
-                      download
-                      className="flex items-center gap-[7px] h-9 px-4 bg-[#DA1E28] text-white rounded-[4px] text-[13.5px] font-semibold hover:bg-[#B5161F] transition-colors shrink-0"
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                        <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/>
-                      </svg>
-                      {t("download.trigger") || "下载"}
-                    </a>
-                  ) : (
-                    <button
-                      type="button"
-                      className="flex items-center gap-[7px] h-9 px-4 bg-white text-[#17181C] border border-[#C9C8C0] rounded-[4px] text-[13.5px] font-medium hover:border-[#17181C] hover:bg-[#F6F5F0] transition-colors shrink-0"
-                    >
-                      {t("download.request")}
-                    </button>
-                  )}
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
 
             {/* Footer note */}
             <div className="px-5 py-[13px] text-[12px] text-[#8C8C84] bg-[#FAFAF7]">
