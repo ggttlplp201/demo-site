@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Nav } from "./Nav";
 import { CartProvider } from "@/state/cart";
@@ -6,6 +6,12 @@ import { BomProvider } from "@/state/bom";
 import { CompareProvider } from "@/state/compare";
 import { ListsProvider } from "@/state/lists";
 import { LocaleProvider } from "@/state/locale";
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn(), prefetch: vi.fn() }),
+  useSearchParams: () => ({ get: () => null }),
+  usePathname: () => "/",
+}));
 
 function Providers({ children }: { children: React.ReactNode }) {
   return (

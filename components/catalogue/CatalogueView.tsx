@@ -31,23 +31,27 @@ const DENSITY_COLS: Record<Density, string> = {
 export function CatalogueView() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("category");
+  const initialQuery = searchParams.get("q") ?? "";
   const t = useT();
 
   const [filters, setFilters] = useState<CatalogueFilters>(() => ({
     ...EMPTY_FILTERS,
     category: initialCategory ? [initialCategory] : [],
   }));
+  const [query, setQuery] = useState(initialQuery);
   const [sort, setSort] = useState<SortOption>("featured");
   const [density, setDensity] = useState<Density>("balanced");
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   useEffect(() => {
     const cat = searchParams.get("category");
+    const q = searchParams.get("q") ?? "";
     setFilters(prev => ({ ...prev, category: cat ? [cat] : [] }));
+    setQuery(q);
   }, [searchParams]);
 
   const allProducts = repo.getProducts();
-  const filtered = filterProducts(allProducts, filters, "");
+  const filtered = filterProducts(allProducts, filters, query);
   const sorted = sortProducts(filtered, sort);
 
   const DENSITY_OPTIONS: { value: Density; label: string }[] = [

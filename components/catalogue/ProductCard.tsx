@@ -44,16 +44,13 @@ function getFirstColorTemp(product: Product): string | null {
 
 const FORMAT_PRIORITY: BimAssetFormat[] = ["IFC", "RFA", "DWG", "PDF"];
 
-function getFormats(product: Product): { visible: BimAssetFormat[]; extra: number } {
+function getFormats(product: Product): BimAssetFormat[] {
   const all = [...new Set(product.bim_assets.map(a => a.format))];
   // Sort by priority order first, then others
-  const sorted: BimAssetFormat[] = [
+  return [
     ...FORMAT_PRIORITY.filter(f => all.includes(f)),
     ...all.filter(f => !FORMAT_PRIORITY.includes(f)),
   ];
-  const visible = sorted.slice(0, 4);
-  const extra = sorted.length - visible.length;
-  return { visible, extra };
 }
 
 export function ProductCard({ product }: { product: Product }) {
@@ -67,7 +64,7 @@ export function ProductCard({ product }: { product: Product }) {
   const powerRange = getPowerRange(product);
   const ipLabel = getIpLabel(product);
   const colorTemp = getFirstColorTemp(product);
-  const { visible: formats, extra: formatsExtra } = getFormats(product);
+  const formats = getFormats(product);
   const variantCount = product.variants.length;
   const firstRef = product.variants[0]?.ref ?? "";
 
@@ -228,18 +225,17 @@ export function ProductCard({ product }: { product: Product }) {
           {variantCount > 1 ? ` · ${variantCount} ${t("card.references")}` : variantCount === 1 ? ` · ${firstRef}` : ""}
         </p>
 
-        {/* File row */}
+        {/* File row — label is flex-none top-left; badges wrap onto additional rows */}
         {formats.length > 0 && (
-          <div className="flex flex-wrap items-center gap-1 mb-2">
-            <span className="text-[11px] text-[#B4B4AC] mr-1">{t("cat.fileLabel")}</span>
-            {formats.map(fmt => (
-              <span key={fmt} className="font-mono text-[10px] border border-[#E6E5DE] rounded-[2px] px-1 text-[#3A3B40]">
-                {fmt}
-              </span>
-            ))}
-            {formatsExtra > 0 && (
-              <span className="font-mono text-[10px] text-[#8C8C84] px-1">+{formatsExtra}</span>
-            )}
+          <div className="flex gap-2 mb-2 items-start">
+            <span className="flex-none text-[11px] text-[#8C8C84] leading-[1.6] mt-px">{t("cat.fileLabel")}</span>
+            <div className="flex flex-wrap gap-1">
+              {formats.map(fmt => (
+                <span key={fmt} className="font-mono text-[10px] border border-[#E6E5DE] rounded-[2px] px-1 text-[#3A3B40]">
+                  {fmt}
+                </span>
+              ))}
+            </div>
           </div>
         )}
       </div>

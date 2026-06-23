@@ -2,7 +2,7 @@
 
 import { useState, Suspense } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCart } from "@/state/cart";
 import { useBom } from "@/state/bom";
 import { useCompare } from "@/state/compare";
@@ -138,11 +138,13 @@ function MobileMenu({
   open,
   search,
   onSearchChange,
+  onSearchSubmit,
   onClose,
 }: {
   open: boolean;
   search: string;
   onSearchChange: (v: string) => void;
+  onSearchSubmit: (e: React.FormEvent) => void;
   onClose: () => void;
 }) {
   const t = useT();
@@ -154,7 +156,7 @@ function MobileMenu({
   return (
     <div className="border-b border-hairline bg-white md:hidden">
       {/* Mobile search */}
-      <div className="px-6 py-3 relative">
+      <form role="search" onSubmit={onSearchSubmit} className="px-6 py-3 relative">
         <span className="absolute left-9 top-1/2 -translate-y-1/2 pointer-events-none">
           <SearchIcon />
         </span>
@@ -162,10 +164,11 @@ function MobileMenu({
           type="search"
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
+          aria-label={t("search.placeholder")}
           placeholder={t("search.placeholder")}
           className="w-full h-[46px] border border-hairline bg-wash rounded pl-[42px] pr-4 text-[15px] text-ink outline-none focus:border-ink"
         />
-      </div>
+      </form>
 
       {/* Categories */}
       <nav aria-label={t("nav.categories")}>
@@ -218,8 +221,20 @@ export function Nav() {
   const { refs } = useCompare();
   const { saved } = useLists();
   const t = useT();
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  function handleSearchSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const q = search.trim();
+    if (q) {
+      router.push(`/catalogue?q=${encodeURIComponent(q)}`);
+    } else {
+      router.push("/catalogue");
+    }
+    setMobileOpen(false);
+  }
 
   return (
     <header className="sticky top-0 z-50">
@@ -242,7 +257,11 @@ export function Nav() {
           </Link>
 
           {/* Search — flex-1, hidden on mobile */}
-          <div className="hidden md:flex flex-1 max-w-[560px] relative">
+          <form
+            role="search"
+            onSubmit={handleSearchSubmit}
+            className="hidden md:flex flex-1 max-w-[560px] relative"
+          >
             <span className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
               <SearchIcon />
             </span>
@@ -250,10 +269,11 @@ export function Nav() {
               type="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              aria-label={t("search.placeholder")}
               placeholder={t("search.placeholder")}
               className="w-full h-[46px] border border-hairline bg-wash rounded pl-[42px] pr-4 text-[15px] text-ink outline-none focus:border-ink"
             />
-          </div>
+          </form>
 
           {/* Right cluster */}
           <div className="flex items-center gap-[6px] ml-auto text-body">
@@ -359,6 +379,7 @@ export function Nav() {
         open={mobileOpen}
         search={search}
         onSearchChange={setSearch}
+        onSearchSubmit={handleSearchSubmit}
         onClose={() => setMobileOpen(false)}
       />
     </header>

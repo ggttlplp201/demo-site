@@ -38,7 +38,7 @@ export function FilterSidebar({ filters, onChange }: FilterSidebarProps) {
     filters.format.length > 0;
 
   return (
-    <aside className="border-r border-[#E6E5DE] pt-[34px] px-[28px] pb-[80px] sticky top-[128px] self-start">
+    <aside className="border-r border-[#E6E5DE] pt-[34px] px-[28px] pb-[80px] sticky top-[128px] self-start max-h-[calc(100vh-128px)] overflow-y-auto scrollbar-thin scrollbar-thumb-[#D8D7CF] scrollbar-track-transparent">
       {/* Header */}
       <div className="flex items-baseline justify-between mb-[26px]">
         <h2 className="text-lg font-semibold text-[#17181C]">{t("cat.filters")}</h2>

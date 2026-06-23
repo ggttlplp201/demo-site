@@ -13,23 +13,24 @@ export function BimMetadataSummary({ product }: Props) {
   const meta = product.bim_metadata;
   if (!meta) return null;
 
-  const fbSpec = t("fb.spec");
+  // TBD is used for placeholder / not-yet-specified BIM fields
+  const TBD = "TBD";
   const rows: { label: string; value: string }[] = [
-    { label: t("bim.productId"), value: String(resolvePlaceholder(meta.product_id, fbSpec)) },
+    { label: t("bim.productId"), value: String(resolvePlaceholder(meta.product_id, TBD)) },
     {
       label: t("bim.dimensions"),
       value: meta.dimensions
         ? (() => {
             const real = Object.entries(meta.dimensions).filter(([, v]) => hasRealValue(v));
-            return real.length > 0 ? real.map(([k, v]) => `${k}: ${v}`).join(", ") : fbSpec;
+            return real.length > 0 ? real.map(([k, v]) => `${k}: ${v}`).join(", ") : TBD;
           })()
-        : fbSpec,
+        : TBD,
     },
     {
       label: t("bim.materials"),
       value: hasRealValue(meta.materials)
         ? (meta.materials as string[]).filter(hasRealValue).join(", ")
-        : fbSpec,
+        : TBD,
     },
     {
       label: t("bim.ifcProperties"),
@@ -38,11 +39,11 @@ export function BimMetadataSummary({ product }: Props) {
             const real = Object.entries(meta.ifc_properties)
               .filter(([, v]) => hasRealValue(v))
               .slice(0, 3);
-            return real.length > 0 ? real.map(([k, v]) => `${k}: ${v}`).join("; ") : fbSpec;
+            return real.length > 0 ? real.map(([k, v]) => `${k}: ${v}`).join("; ") : TBD;
           })()
-        : fbSpec,
+        : TBD,
     },
-    { label: t("bim.version"), value: String(resolvePlaceholder(meta.version, fbSpec)) },
+    { label: t("bim.version"), value: String(resolvePlaceholder(meta.version, TBD)) },
   ];
 
   return (

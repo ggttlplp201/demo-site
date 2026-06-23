@@ -184,7 +184,7 @@ export function DetailView({ productId }: DetailViewProps) {
               <Gallery images={product.images} alt={localizedName(product, locale)} />
             )}
             {mediaTab === "model" && modelAvailable && (
-              <div className="aspect-square bg-[#F6F5F0] border border-[#E6E5DE] rounded-[14px] overflow-hidden">
+              <div className="bg-[#F6F5F0] border border-[#E6E5DE] rounded-[14px] overflow-hidden">
                 <ModelViewer src={product.model3d} alt={localizedName(product, locale)} />
               </div>
             )}

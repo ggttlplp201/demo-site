@@ -88,17 +88,18 @@ describe("ProductCard", () => {
       expect(mockPush).toHaveBeenCalledWith(`/products/${product.id}`);
     });
 
-    it("caps format badges at 4 with +N chip when product has more formats", () => {
-      // barra-led-high-bay has many formats
+    it("shows all format badges (wrapping) without a +N overflow chip", () => {
+      // barra-led-high-bay has many formats — all should be shown, no cap
       const formats = [...new Set(product.bim_assets.map(a => a.format))];
       render(<Wrapper><ProductCard product={product} /></Wrapper>);
-      if (formats.length > 4) {
-        // Should show +N chip somewhere in the card
-        const container = document.body;
-        const text = container.textContent ?? "";
-        const extra = formats.length - 4;
-        expect(text).toContain(`+${extra}`);
+      const container = document.body;
+      const text = container.textContent ?? "";
+      // Every format should appear in the card text
+      for (const fmt of formats) {
+        expect(text).toContain(fmt);
       }
+      // No +N overflow chip should appear
+      expect(text).not.toMatch(/\+\d+/);
     });
   });
 
