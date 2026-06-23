@@ -14,9 +14,10 @@ describe("SupplyChainTimeline", () => {
 
     render(<Wrapper><SupplyChainTimeline product={product} /></Wrapper>);
 
-    expect(screen.getByText("Produção")).toBeInTheDocument();
-    expect(screen.getByText("Expedição")).toBeInTheDocument();
-    expect(screen.getByText("Transporte")).toBeInTheDocument();
-    expect(screen.getByText("Em obra")).toBeInTheDocument();
+    // Default locale is ZH — labels must render in Chinese
+    expect(screen.getByText("生产")).toBeInTheDocument();
+    expect(screen.getByText("发货")).toBeInTheDocument();
+    expect(screen.getByText("运输")).toBeInTheDocument();
+    expect(screen.getByText("现场")).toBeInTheDocument();
   });
 });

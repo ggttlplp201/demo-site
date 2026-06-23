@@ -5,6 +5,14 @@ import { hasRealValue, resolvePlaceholder } from "@/lib/placeholder";
 import { useT } from "@/state/locale";
 import type { Product } from "@/lib/types";
 
+/** Maps the Portuguese node label (from data) to its i18n key */
+const NODE_LABEL_KEY: Record<string, string> = {
+  "Produção":   "supply.node.production",
+  "Expedição":  "supply.node.dispatch",
+  "Transporte": "supply.node.transport",
+  "Em obra":    "supply.node.onsite",
+};
+
 interface Props {
   product: Product;
 }
@@ -24,7 +32,9 @@ export function SupplyChainTimeline({ product }: Props) {
           {nodes.map((node, i) => (
             <li key={node.label} className="flex items-center">
               <div className="border border-aluminium rounded p-3 min-w-[100px] text-center">
-                <p className="font-medium text-ink text-xs">{node.label}</p>
+                <p className="font-medium text-ink text-xs">
+                  {NODE_LABEL_KEY[node.label] ? t(NODE_LABEL_KEY[node.label]) : node.label}
+                </p>
                 <p className="text-aluminium-dark text-xs mt-1">
                   {hasRealValue(node.status) ? node.status : "—"}
                 </p>

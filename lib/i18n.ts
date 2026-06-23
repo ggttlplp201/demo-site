@@ -112,26 +112,86 @@ export const messages: Record<Locale, Record<string, string>> = {
     "compare.attribute": "Atributo",
     "compare.noImage": "Sem imagem",
     "spec.power": "Potência",
-    "spec.dimensions": "Dimensões",
-    "spec.voltage": "Tensão",
-    "spec.efficacy": "Eficácia luminosa",
     "spec.lumens": "Fluxo luminoso",
-    "spec.colorTemp": "Temperatura de cor",
-    "spec.cri": "CRI",
-    "spec.ip": "Proteção IP",
-    "spec.beamAngle": "Ângulo de feixe",
-    "spec.finish": "Acabamento",
-    "spec.material": "Material",
-    "spec.energyClass": "Classe energética",
-    "spec.warranty": "Garantia",
-    "spec.certificates": "Certificações",
     "spec.length": "Comprimento",
     "spec.width": "Largura",
     "spec.height": "Altura",
     "spec.diameter": "Diâmetro",
-    "spec.beamType": "Tipo de feixe",
-    "spec.chip": "Chip",
     "spec.lifetime": "Vida útil",
+    // canonical spec keys (keyed by data field name)
+    "spec.acoustic_dB": "Isolamento acústico (dB)",
+    "spec.acoustic_underlay_mm": "Subcamada acústica (mm)",
+    "spec.adhesive": "Cola",
+    "spec.air_class": "Classe de permeabilidade ao ar",
+    "spec.anti_fog": "Anti-embaciamento",
+    "spec.base_module_mm": "Módulo base (mm)",
+    "spec.beam_angle_deg": "Ângulo de feixe",
+    "spec.beam_angles": "Ângulos de feixe",
+    "spec.beam_type": "Tipo de feixe",
+    "spec.body": "Corpo",
+    "spec.certificates": "Certificações",
+    "spec.certification": "Certificação",
+    "spec.chip": "Chip",
+    "spec.color": "Cor",
+    "spec.color_temperature": "Temperatura de cor",
+    "spec.colour": "Cor",
+    "spec.colours": "Cores",
+    "spec.connection": "Ligação",
+    "spec.construction": "Construção",
+    "spec.cri": "CRI",
+    "spec.depth_mm": "Profundidade (mm)",
+    "spec.detail": "Detalhe",
+    "spec.dimensions": "Dimensões",
+    "spec.door_height_mm": "Altura da porta (mm)",
+    "spec.door_thickness_mm": "Espessura da porta (mm)",
+    "spec.door_width_mm": "Largura da porta (mm)",
+    "spec.energy_class": "Classe energética",
+    "spec.finish": "Acabamento",
+    "spec.fire_resistance": "Resistência ao fogo",
+    "spec.frame": "Moldura",
+    "spec.glazing": "Vidro",
+    "spec.hinges": "Dobradiças",
+    "spec.includes": "Inclui",
+    "spec.insulation": "Isolamento",
+    "spec.ip_rating": "Proteção IP",
+    "spec.lamela_thickness_mm": "Espessura da lamela (mm)",
+    "spec.leaf_thickness_mm": "Espessura da folha (mm)",
+    "spec.lifetime_hours": "Vida útil",
+    "spec.load_class": "Classe de carga",
+    "spec.luminous_efficacy": "Eficácia luminosa",
+    "spec.material": "Material",
+    "spec.material_doors": "Material das portas",
+    "spec.material_structure": "Material da estrutura",
+    "spec.max_height_mm": "Altura máxima (mm)",
+    "spec.max_width_mm": "Largura máxima (mm)",
+    "spec.min_wall_mm": "Espessura mínima da parede (mm)",
+    "spec.nominal_height_mm": "Altura nominal (mm)",
+    "spec.nominal_width_mm": "Largura nominal (mm)",
+    "spec.operating_temp": "Temperatura de funcionamento",
+    "spec.option": "Opção",
+    "spec.power_density": "Densidade de potência",
+    "spec.profile": "Perfil",
+    "spec.security_class": "Classe de segurança",
+    "spec.species": "Espécie de madeira",
+    "spec.standards": "Normas",
+    "spec.surface": "Superfície",
+    "spec.system": "Sistema",
+    "spec.thermal_u_value": "Valor U térmico",
+    "spec.thickness_mm": "Espessura (mm)",
+    "spec.tolerance_height_mm": "Tolerância altura (mm)",
+    "spec.tolerance_length_mm": "Tolerância comprimento (mm)",
+    "spec.tolerance_thickness_mm": "Tolerância espessura (mm)",
+    "spec.total_thickness_mm": "Espessura total (mm)",
+    "spec.type": "Tipo",
+    "spec.use": "Utilização",
+    "spec.voltage": "Tensão",
+    "spec.warranty_years": "Garantia",
+    "spec.water_class": "Classe de estanquidade à água",
+    "spec.wind_class": "Classe de resistência ao vento",
+    "supply.node.production": "Produção",
+    "supply.node.dispatch": "Expedição",
+    "supply.node.transport": "Transporte",
+    "supply.node.onsite": "Em obra",
     "unit.years": "anos",
     "bim.productId": "ID do produto",
     "bim.version": "Versão",
@@ -253,26 +313,86 @@ export const messages: Record<Locale, Record<string, string>> = {
     "compare.attribute": "Attribute",
     "compare.noImage": "No image",
     "spec.power": "Power",
-    "spec.dimensions": "Dimensions",
-    "spec.voltage": "Voltage",
-    "spec.efficacy": "Luminous efficacy",
     "spec.lumens": "Luminous flux",
-    "spec.colorTemp": "Colour temperature",
-    "spec.cri": "CRI",
-    "spec.ip": "IP rating",
-    "spec.beamAngle": "Beam angle",
-    "spec.finish": "Finish",
-    "spec.material": "Material",
-    "spec.energyClass": "Energy class",
-    "spec.warranty": "Warranty",
-    "spec.certificates": "Certifications",
     "spec.length": "Length",
     "spec.width": "Width",
     "spec.height": "Height",
     "spec.diameter": "Diameter",
-    "spec.beamType": "Beam type",
-    "spec.chip": "Chip",
     "spec.lifetime": "Lifetime",
+    // canonical spec keys (keyed by data field name)
+    "spec.acoustic_dB": "Acoustic insulation (dB)",
+    "spec.acoustic_underlay_mm": "Acoustic underlay (mm)",
+    "spec.adhesive": "Adhesive",
+    "spec.air_class": "Air permeability class",
+    "spec.anti_fog": "Anti-fog",
+    "spec.base_module_mm": "Base module (mm)",
+    "spec.beam_angle_deg": "Beam angle",
+    "spec.beam_angles": "Beam angles",
+    "spec.beam_type": "Beam type",
+    "spec.body": "Body",
+    "spec.certificates": "Certifications",
+    "spec.certification": "Certification",
+    "spec.chip": "Chip",
+    "spec.color": "Colour",
+    "spec.color_temperature": "Colour temperature",
+    "spec.colour": "Colour",
+    "spec.colours": "Colours",
+    "spec.connection": "Connection",
+    "spec.construction": "Construction",
+    "spec.cri": "CRI",
+    "spec.depth_mm": "Depth (mm)",
+    "spec.detail": "Detail",
+    "spec.dimensions": "Dimensions",
+    "spec.door_height_mm": "Door height (mm)",
+    "spec.door_thickness_mm": "Door thickness (mm)",
+    "spec.door_width_mm": "Door width (mm)",
+    "spec.energy_class": "Energy class",
+    "spec.finish": "Finish",
+    "spec.fire_resistance": "Fire resistance",
+    "spec.frame": "Frame",
+    "spec.glazing": "Glazing",
+    "spec.hinges": "Hinges",
+    "spec.includes": "Includes",
+    "spec.insulation": "Insulation",
+    "spec.ip_rating": "IP rating",
+    "spec.lamela_thickness_mm": "Lamella thickness (mm)",
+    "spec.leaf_thickness_mm": "Leaf thickness (mm)",
+    "spec.lifetime_hours": "Lifetime",
+    "spec.load_class": "Load class",
+    "spec.luminous_efficacy": "Luminous efficacy",
+    "spec.material": "Material",
+    "spec.material_doors": "Door material",
+    "spec.material_structure": "Structure material",
+    "spec.max_height_mm": "Max height (mm)",
+    "spec.max_width_mm": "Max width (mm)",
+    "spec.min_wall_mm": "Min wall thickness (mm)",
+    "spec.nominal_height_mm": "Nominal height (mm)",
+    "spec.nominal_width_mm": "Nominal width (mm)",
+    "spec.operating_temp": "Operating temperature",
+    "spec.option": "Option",
+    "spec.power_density": "Power density",
+    "spec.profile": "Profile",
+    "spec.security_class": "Security class",
+    "spec.species": "Wood species",
+    "spec.standards": "Standards",
+    "spec.surface": "Surface",
+    "spec.system": "System",
+    "spec.thermal_u_value": "Thermal U-value",
+    "spec.thickness_mm": "Thickness (mm)",
+    "spec.tolerance_height_mm": "Height tolerance (mm)",
+    "spec.tolerance_length_mm": "Length tolerance (mm)",
+    "spec.tolerance_thickness_mm": "Thickness tolerance (mm)",
+    "spec.total_thickness_mm": "Total thickness (mm)",
+    "spec.type": "Type",
+    "spec.use": "Use",
+    "spec.voltage": "Voltage",
+    "spec.warranty_years": "Warranty",
+    "spec.water_class": "Water tightness class",
+    "spec.wind_class": "Wind resistance class",
+    "supply.node.production": "Production",
+    "supply.node.dispatch": "Dispatch",
+    "supply.node.transport": "Transport",
+    "supply.node.onsite": "On site",
     "unit.years": "yr",
     "bim.productId": "Product ID",
     "bim.version": "Version",
@@ -394,26 +514,86 @@ export const messages: Record<Locale, Record<string, string>> = {
     "compare.attribute": "属性",
     "compare.noImage": "暂无图片",
     "spec.power": "功率",
-    "spec.dimensions": "尺寸",
-    "spec.voltage": "电压",
-    "spec.efficacy": "光效",
     "spec.lumens": "光通量",
-    "spec.colorTemp": "色温",
-    "spec.cri": "显色指数 (CRI)",
-    "spec.ip": "IP 防护等级",
-    "spec.beamAngle": "光束角",
-    "spec.finish": "表面处理",
-    "spec.material": "材质",
-    "spec.energyClass": "能效等级",
-    "spec.warranty": "质保",
-    "spec.certificates": "认证",
     "spec.length": "长度",
     "spec.width": "宽度",
     "spec.height": "高度",
     "spec.diameter": "直径",
-    "spec.beamType": "光束类型",
-    "spec.chip": "灯珠",
     "spec.lifetime": "使用寿命",
+    // canonical spec keys (keyed by data field name)
+    "spec.acoustic_dB": "隔音 (dB)",
+    "spec.acoustic_underlay_mm": "隔音垫 (mm)",
+    "spec.adhesive": "胶水",
+    "spec.air_class": "空气渗透等级",
+    "spec.anti_fog": "防雾",
+    "spec.base_module_mm": "基础模块 (mm)",
+    "spec.beam_angle_deg": "光束角",
+    "spec.beam_angles": "光束角",
+    "spec.beam_type": "光束类型",
+    "spec.body": "主体",
+    "spec.certificates": "认证",
+    "spec.certification": "认证",
+    "spec.chip": "灯珠",
+    "spec.color": "颜色",
+    "spec.color_temperature": "色温",
+    "spec.colour": "颜色",
+    "spec.colours": "颜色",
+    "spec.connection": "连接",
+    "spec.construction": "结构",
+    "spec.cri": "显色指数 (CRI)",
+    "spec.depth_mm": "深度 (mm)",
+    "spec.detail": "细节",
+    "spec.dimensions": "尺寸",
+    "spec.door_height_mm": "门高 (mm)",
+    "spec.door_thickness_mm": "门厚 (mm)",
+    "spec.door_width_mm": "门宽 (mm)",
+    "spec.energy_class": "能效等级",
+    "spec.finish": "表面处理",
+    "spec.fire_resistance": "耐火性",
+    "spec.frame": "边框",
+    "spec.glazing": "玻璃",
+    "spec.hinges": "铰链",
+    "spec.includes": "含",
+    "spec.insulation": "隔热",
+    "spec.ip_rating": "IP 防护等级",
+    "spec.lamela_thickness_mm": "面层厚度 (mm)",
+    "spec.leaf_thickness_mm": "门扇厚度 (mm)",
+    "spec.lifetime_hours": "使用寿命",
+    "spec.load_class": "承载等级",
+    "spec.luminous_efficacy": "光效",
+    "spec.material": "材质",
+    "spec.material_doors": "门材质",
+    "spec.material_structure": "结构材质",
+    "spec.max_height_mm": "最大高度 (mm)",
+    "spec.max_width_mm": "最大宽度 (mm)",
+    "spec.min_wall_mm": "最小墙厚 (mm)",
+    "spec.nominal_height_mm": "标称高度 (mm)",
+    "spec.nominal_width_mm": "标称宽度 (mm)",
+    "spec.operating_temp": "工作温度",
+    "spec.option": "选项",
+    "spec.power_density": "功率密度",
+    "spec.profile": "型材",
+    "spec.security_class": "安全等级",
+    "spec.species": "木种",
+    "spec.standards": "标准",
+    "spec.surface": "表面",
+    "spec.system": "安装系统",
+    "spec.thermal_u_value": "传热系数 U 值",
+    "spec.thickness_mm": "厚度 (mm)",
+    "spec.tolerance_height_mm": "公差高度 (mm)",
+    "spec.tolerance_length_mm": "公差长度 (mm)",
+    "spec.tolerance_thickness_mm": "公差厚度 (mm)",
+    "spec.total_thickness_mm": "总厚度 (mm)",
+    "spec.type": "类型",
+    "spec.use": "用途",
+    "spec.voltage": "电压",
+    "spec.warranty_years": "质保",
+    "spec.water_class": "水密性等级",
+    "spec.wind_class": "抗风等级",
+    "supply.node.production": "生产",
+    "supply.node.dispatch": "发货",
+    "supply.node.transport": "运输",
+    "supply.node.onsite": "现场",
     "unit.years": "年",
     "bim.productId": "产品编号",
     "bim.version": "版本",
@@ -441,53 +621,162 @@ export function translate(locale: Locale, key: string): string {
  * Falls back to `name` (Portuguese) when the locale-specific field is absent or empty.
  */
 // ── Spec-value localizer ──────────────────────────────────────────────────────
-// Translates Portuguese material / finish / beam_type values.
+// Translates Portuguese material / finish / spec values to EN/ZH.
 // Values not in the map (numbers, codes, etc.) pass through unchanged.
+
+/** Whole-string direct lookup map */
 const SPEC_VALUE_MAP: Record<string, { en: string; zh: string }> = {
-  // Materials
-  "Alumínio":                         { en: "Aluminium",        zh: "铝" },
-  "Alumínio/PC":                      { en: "Aluminium/PC",     zh: "铝/PC" },
-  "Alumínio+PC":                      { en: "Aluminium+PC",     zh: "铝+PC" },
-  "PC+UV-resistant":                  { en: "PC+UV-resistant",  zh: "PC+防紫外线" },
-  "PVC+PC/PMMA":                      { en: "PVC+PC/PMMA",      zh: "PVC+PC/PMMA" },
-  "Inox+alumínio+vidro+plástico":     { en: "Stainless steel+aluminium+glass+plastic", zh: "不锈钢+铝+玻璃+塑料" },
-  "Alumínio+inox+vidro+plástico":     { en: "Aluminium+stainless steel+glass+plastic", zh: "铝+不锈钢+玻璃+塑料" },
-  "madeira natural":                  { en: "Natural wood",     zh: "天然木材" },
-  "Vinílico multicamadas":            { en: "Multilayer vinyl", zh: "多层乙烯基" },
-  "Núcleo rígido vinílico":           { en: "Rigid vinyl core", zh: "硬质乙烯基芯" },
-  "MDF":                              { en: "MDF",              zh: "MDF" },
-  "Resina composta/BMC":              { en: "Resina composta/BMC", zh: "复合树脂/BMC" },
-  "Aço inoxidável":                   { en: "Stainless steel",  zh: "不锈钢" },
-  "Inox":                             { en: "Stainless steel",  zh: "不锈钢" },
-  "MDF/CPL/LVL":                      { en: "MDF/CPL/LVL",      zh: "MDF/CPL/LVL" },
-  "aço galvanizado":                  { en: "Galvanised steel", zh: "镀锌钢" },
-  "Aço S275 JR galvanizado":          { en: "Galvanised steel S275 JR", zh: "镀锌钢 S275 JR" },
-  "PET técnico alta resistência":     { en: "High-strength technical PET", zh: "高强度工程 PET" },
-  "PC":                               { en: "PC",               zh: "PC" },
-  "PVC":                              { en: "PVC",              zh: "PVC" },
-  "Aço":                              { en: "Steel",            zh: "钢" },
-  "Aglomerado":                       { en: "Chipboard",        zh: "刨花板" },
-  "Madeira":                          { en: "Wood",             zh: "木材" },
-  // Finishes
-  "Branco":                           { en: "White",            zh: "白色" },
-  "Preto":                            { en: "Black",            zh: "黑色" },
-  "Dourado":                          { en: "Gold",             zh: "金色" },
-  "verniz UV":                        { en: "UV varnish",       zh: "UV 清漆" },
-  "verniz+óleo natural":              { en: "Varnish+natural oil", zh: "清漆+天然油" },
-  "texturado":                        { en: "Textured",         zh: "纹理" },
-  "melamina/CPL/lacado":              { en: "Melamine/CPL/lacquered", zh: "三聚氰胺/CPL/烤漆" },
-  "laminado/lacada":                  { en: "Laminated/lacquered", zh: "贴面/烤漆" },
-  "aço pintado opcional":             { en: "Optional painted steel", zh: "可选烤漆钢" },
-  // Beam types
-  "simétrico":                        { en: "Symmetric",        zh: "对称" },
-  "assimétrico":                      { en: "Asymmetric",       zh: "非对称" },
+  // --- Materials ---
+  "Alumínio":                          { en: "Aluminium",                          zh: "铝" },
+  "alumínio":                          { en: "aluminium",                          zh: "铝" },
+  "Alumínio/PC":                       { en: "Aluminium/PC",                       zh: "铝/PC" },
+  "Alumínio+PC":                       { en: "Aluminium+PC",                       zh: "铝+PC" },
+  "PC+UV-resistant":                   { en: "PC+UV-resistant",                    zh: "PC+防紫外线" },
+  "PVC+PC/PMMA":                       { en: "PVC+PC/PMMA",                        zh: "PVC+PC/PMMA" },
+  "Inox+alumínio+vidro+plástico":      { en: "Stainless steel+aluminium+glass+plastic", zh: "不锈钢+铝+玻璃+塑料" },
+  "Alumínio+inox+vidro+plástico":      { en: "Aluminium+stainless steel+glass+plastic", zh: "铝+不锈钢+玻璃+塑料" },
+  "madeira natural":                   { en: "Natural wood",                       zh: "天然木材" },
+  "Madeira natural":                   { en: "Natural wood",                       zh: "天然木材" },
+  "Vinílico multicamadas":             { en: "Multilayer vinyl",                   zh: "多层乙烯基" },
+  "Núcleo rígido vinílico":            { en: "Rigid vinyl core",                   zh: "硬质乙烯基芯" },
+  "MDF":                               { en: "MDF",                                zh: "MDF" },
+  "MDF/CPL/LVL":                       { en: "MDF/CPL/LVL",                        zh: "MDF/CPL/LVL" },
+  "Resina composta/BMC":               { en: "Composite resin/BMC",                zh: "复合树脂/BMC" },
+  "Aço inoxidável":                    { en: "Stainless steel",                    zh: "不锈钢" },
+  "Inox":                              { en: "Stainless steel",                    zh: "不锈钢" },
+  "aço galvanizado":                   { en: "Galvanised steel",                   zh: "镀锌钢" },
+  "galvanizado":                       { en: "Galvanised",                         zh: "镀锌" },
+  "Aço S275 JR galvanizado":           { en: "Galvanised steel S275 JR",           zh: "镀锌钢 S275 JR" },
+  "PET técnico alta resistência":      { en: "High-strength technical PET",        zh: "高强度工程 PET" },
+  "PC":                                { en: "PC",                                 zh: "PC" },
+  "PVC":                               { en: "PVC",                                zh: "PVC" },
+  "PMMA":                              { en: "PMMA",                               zh: "PMMA" },
+  "Aço":                               { en: "Steel",                              zh: "钢" },
+  "aço":                               { en: "steel",                              zh: "钢" },
+  "Aglomerado":                        { en: "Chipboard",                          zh: "刨花板" },
+  "aglomerado":                        { en: "chipboard",                          zh: "刨花板" },
+  "Madeira":                           { en: "Wood",                               zh: "木材" },
+  "madeira":                           { en: "wood",                               zh: "木材" },
+  "vidro":                             { en: "glass",                              zh: "玻璃" },
+  "vidro resistente ao fogo":          { en: "fire-resistant glass",               zh: "防火玻璃" },
+  "plástico":                          { en: "plastic",                            zh: "塑料" },
+  // --- Finishes / surface treatments ---
+  "Branco":                            { en: "White",                              zh: "白色" },
+  "Preto":                             { en: "Black",                              zh: "黑色" },
+  "Dourado":                           { en: "Gold",                               zh: "金色" },
+  "Cinza":                             { en: "Grey",                               zh: "灰色" },
+  "natural":                           { en: "natural",                            zh: "天然" },
+  "Natural":                           { en: "Natural",                            zh: "天然" },
+  "verniz UV":                         { en: "UV varnish",                         zh: "UV 清漆" },
+  "verniz":                            { en: "varnish",                            zh: "清漆" },
+  "verniz+óleo natural":               { en: "Varnish+natural oil",                zh: "清漆+天然油" },
+  "óleo natural":                      { en: "natural oil",                        zh: "天然油" },
+  "texturado":                         { en: "Textured",                           zh: "纹理" },
+  "lacado":                            { en: "lacquered",                          zh: "烤漆" },
+  "pintura lacada":                    { en: "lacquered paint",                    zh: "烤漆" },
+  "laminado":                          { en: "laminated",                          zh: "层压" },
+  "laminado CPL/pintura lacada":       { en: "CPL laminate/lacquered",             zh: "CPL层压/烤漆" },
+  "laminado/lacada":                   { en: "Laminated/lacquered",                zh: "贴面/烤漆" },
+  "melamina/CPL/lacado":               { en: "Melamine/CPL/lacquered",             zh: "三聚氰胺/CPL/烤漆" },
+  "folha madeira":                     { en: "wood veneer",                        zh: "木皮" },
+  "folha madeira c/ verniz OU pintura lacada": { en: "wood veneer with varnish OR lacquered", zh: "木皮含清漆或烤漆" },
+  "escovado":                          { en: "brushed",                            zh: "拉丝" },
+  "liso":                              { en: "smooth",                             zh: "平滑" },
+  "CPL":                               { en: "CPL",                                zh: "CPL" },
+  "aço pintado opcional":              { en: "Optional painted steel",             zh: "可选烤漆钢" },
+  // --- Wood species ---
+  "Carvalho":                          { en: "Oak",                                zh: "橡木" },
+  "carvalho":                          { en: "oak",                                zh: "橡木" },
+  "Nogueira":                          { en: "Walnut",                             zh: "胡桃木" },
+  "Teca":                              { en: "Teak",                               zh: "柚木" },
+  // --- Systems / installation ---
+  "click":                             { en: "click",                              zh: "点扣式" },
+  "click macho-fêmea":                 { en: "tongue-and-groove click",            zh: "公母点扣" },
+  "simples":                           { en: "simple",                             zh: "简易" },
+  // --- Construction ---
+  "multicamadas":                      { en: "multilayer",                         zh: "多层" },
+  // --- Beam types ---
+  "simétrico":                         { en: "Symmetric",                          zh: "对称" },
+  "assimétrico":                       { en: "Asymmetric",                         zh: "非对称" },
+  "circular":                          { en: "circular",                           zh: "圆形" },
+  "triangular":                        { en: "triangular",                         zh: "三角形" },
+  // --- Boolean-like values ---
+  "Sim":                               { en: "Yes",                                zh: "是" },
+  "Não":                               { en: "No",                                 zh: "否" },
+  // --- Adhesive / connection ---
+  "cola PUR":                          { en: "PUR adhesive",                       zh: "PUR胶" },
+  // --- Other spec values ---
+  "sob consulta":                      { en: "on request",                         zh: "面议" },
+  "eficiência energética":             { en: "energy efficiency",                  zh: "能效" },
+  "isolamento térmico reforçado":      { en: "reinforced thermal insulation",      zh: "加强隔热" },
+  "ocultas/soft-close":                { en: "concealed/soft-close",               zh: "隐藏/缓冲" },
+  "ferragens de correr":               { en: "sliding hardware",                   zh: "滑动五金" },
+  "grelha/persianas":                  { en: "grille/blinds",                      zh: "格栅/百叶" },
+  "puxadores/fechadura/dobradiças":    { en: "handles/lock/hinges",                zh: "把手/锁/铰链" },
+  "aro 60/80mm oculto (cassete/bolso)": { en: "60/80mm concealed frame (cassette/pocket)", zh: "60/80mm 隐藏框（暗盒/暗槽）" },
+  "bandeira opcional":                 { en: "optional fanlight",                  zh: "可选亮窗" },
+  "arrecadação":                       { en: "storage",                            zh: "储藏" },
+  "U":                                 { en: "U",                                  zh: "U" },
+};
+
+/** Token-level dictionary for splitting compound values */
+const TOKEN_MAP: Record<string, { en: string; zh: string }> = {
+  "Alumínio":          { en: "Aluminium",       zh: "铝" },
+  "alumínio":          { en: "aluminium",       zh: "铝" },
+  "inox":              { en: "stainless steel", zh: "不锈钢" },
+  "Inox":              { en: "Stainless steel", zh: "不锈钢" },
+  "vidro":             { en: "glass",           zh: "玻璃" },
+  "plástico":          { en: "plastic",         zh: "塑料" },
+  "aço":               { en: "steel",           zh: "钢" },
+  "Aço":               { en: "Steel",           zh: "钢" },
+  "galvanizado":       { en: "galvanised",      zh: "镀锌" },
+  "madeira":           { en: "wood",            zh: "木材" },
+  "natural":           { en: "natural",         zh: "天然" },
+  "Natural":           { en: "Natural",         zh: "天然" },
+  "verniz":            { en: "varnish",         zh: "清漆" },
+  "lacada":            { en: "lacquered",       zh: "烤漆" },
+  "lacado":            { en: "lacquered",       zh: "烤漆" },
+  "laminado":          { en: "laminated",       zh: "层压" },
+  "folha":             { en: "veneer",          zh: "木皮" },
+  "multicamadas":      { en: "multilayer",      zh: "多层" },
+  "Vinílico":          { en: "Vinyl",           zh: "乙烯基" },
+  "vinílico":          { en: "vinyl",           zh: "乙烯基" },
+  "rígido":            { en: "rigid",           zh: "硬质" },
+  "Núcleo":            { en: "Core",            zh: "芯" },
+  "Resina":            { en: "Resin",           zh: "树脂" },
+  "composta":          { en: "composite",       zh: "复合" },
+  "alta":              { en: "high",            zh: "高" },
+  "resistência":       { en: "strength",        zh: "强度" },
+  "técnico":           { en: "technical",       zh: "工程" },
+  "PET":               { en: "PET",             zh: "PET" },
+  "pintura":           { en: "paint",           zh: "漆" },
+  "óleo":              { en: "oil",             zh: "油" },
+  "CPL":               { en: "CPL",             zh: "CPL" },
+  "MDF":               { en: "MDF",             zh: "MDF" },
+  "LVL":               { en: "LVL",             zh: "LVL" },
+  "PC":                { en: "PC",              zh: "PC" },
+  "PVC":               { en: "PVC",             zh: "PVC" },
+  "PMMA":              { en: "PMMA",            zh: "PMMA" },
+  "BMC":               { en: "BMC",             zh: "BMC" },
+  "UV-resistant":      { en: "UV-resistant",    zh: "防紫外线" },
+  "click":             { en: "click",           zh: "点扣式" },
+  "simétrico":         { en: "symmetric",       zh: "对称" },
+  "assimétrico":       { en: "asymmetric",      zh: "非对称" },
+  "Sim":               { en: "Yes",             zh: "是" },
+  "Não":               { en: "No",              zh: "否" },
+  "OU":                { en: "OR",              zh: "或" },
+  "ou":                { en: "or",              zh: "或" },
+  "e":                 { en: "and",             zh: "和" },
+  "c/":                { en: "with",            zh: "含" },
 };
 
 /**
- * Translates a Portuguese spec value (material / finish / beam_type) to the
- * given locale.  Arrays (finish can be an array) are joined with " / ".
- * Slash-separated combos like "Branco/Preto" are split and each part translated.
- * Values not in the map pass through unchanged.
+ * Translates a Portuguese spec value to the given locale.
+ * - Arrays are joined with " / ".
+ * - Direct whole-string match first.
+ * - Token-aware: splits on +, /, space, and words "ou"/"e"/"OU"/"c/", translates
+ *   each token individually, rejoins with the same separator.
+ * - Unknown tokens (numbers, codes, certs) pass through unchanged.
  */
 export function localizeSpecValue(value: unknown, locale: Locale): string {
   if (Array.isArray(value)) {
@@ -495,17 +784,70 @@ export function localizeSpecValue(value: unknown, locale: Locale): string {
   }
   const str = String(value);
   if (locale === "pt") return str;
-  // Direct match first
+
+  // 1. Direct whole-string match
   const direct = SPEC_VALUE_MAP[str];
   if (direct) return direct[locale] ?? str;
-  // Try slash-split for combos like "Branco/Preto"
-  if (str.includes("/")) {
-    const parts = str.split("/").map((p) => {
-      const match = SPEC_VALUE_MAP[p.trim()];
-      return match ? (match[locale] ?? p.trim()) : p.trim();
-    });
-    return parts.join("/");
+
+  // 2. Token-aware split on +, then /
+  // Strategy: try + first (material combos), then / (alternatives), then spaces for phrases
+  const translateToken = (token: string): string => {
+    const t = SPEC_VALUE_MAP[token] ?? TOKEN_MAP[token];
+    return t ? (t[locale] ?? token) : token;
+  };
+
+  // Split on " OU " (Portuguese "or")
+  if (/\s+OU\s+/i.test(str)) {
+    return str
+      .split(/\s+OU\s+/i)
+      .map((p) => localizeSpecValue(p.trim(), locale))
+      .join(locale === "zh" ? "或" : " OR ");
   }
+
+  // Split on " ou " (lowercase)
+  if (/\s+ou\s+/.test(str)) {
+    return str
+      .split(/\s+ou\s+/)
+      .map((p) => localizeSpecValue(p.trim(), locale))
+      .join(locale === "zh" ? "或" : " or ");
+  }
+
+  // Split on " e " (Portuguese "and") — only if surrounded by non-letter chars to avoid
+  // splitting words like "elétrico"
+  if (/(?<![a-zA-ZÀ-ú]) e (?![a-zA-ZÀ-ú])/.test(str)) {
+    return str
+      .split(/ e /)
+      .map((p) => localizeSpecValue(p.trim(), locale))
+      .join(locale === "zh" ? "和" : " and ");
+  }
+
+  // Split on + (material combos like "Alumínio+PC")
+  if (str.includes("+")) {
+    return str
+      .split("+")
+      .map((p) => translateToken(p.trim()))
+      .join("+");
+  }
+
+  // Split on / (alternatives like "MDF/CPL/LVL")
+  if (str.includes("/")) {
+    return str
+      .split("/")
+      .map((p) => translateToken(p.trim()))
+      .join("/");
+  }
+
+  // Try space-split for multi-word phrases not in full map
+  // (only if string contains known Portuguese words)
+  const spaceParts = str.split(" ");
+  if (spaceParts.length > 1) {
+    const translated = spaceParts.map(translateToken);
+    // Only return translated version if at least one token was actually translated
+    if (translated.join(" ") !== str) {
+      return translated.join(" ");
+    }
+  }
+
   return str;
 }
 
