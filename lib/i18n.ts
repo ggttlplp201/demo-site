@@ -248,6 +248,7 @@ export const messages: Record<Locale, Record<string, string>> = {
     "downloads.title": "Downloads BIM / CAD",
     "downloads.subtitle": "Consulte todos os ficheiros descarregáveis de cada produto.",
     "home.compareHint": "Arraste para comparar",
+    "nav.downloads": "Downloads BIM / CAD",
   },
   en: {
     "search.placeholder": "Search products, references…",
@@ -490,6 +491,7 @@ export const messages: Record<Locale, Record<string, string>> = {
     "downloads.title": "BIM / CAD downloads",
     "downloads.subtitle": "Browse all downloadable files for every product.",
     "home.compareHint": "Drag to compare",
+    "nav.downloads": "BIM / CAD downloads",
   },
   zh: {
     "search.placeholder": "搜索产品、型号…",
@@ -732,6 +734,7 @@ export const messages: Record<Locale, Record<string, string>> = {
     "downloads.title": "BIM / CAD 下载",
     "downloads.subtitle": "浏览全部产品的可下载文件。",
     "home.compareHint": "拖动对比",
+    "nav.downloads": "BIM / CAD 下载",
   },
 };
 

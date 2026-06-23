@@ -58,6 +58,15 @@ function CartIcon() {
   );
 }
 
+function DownloadIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 3v12M7 11l5 5 5-5" />
+      <path d="M4 19h16" />
+    </svg>
+  );
+}
+
 function HamburgerIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -102,6 +111,7 @@ function LanguageSwitch() {
 function CategoryBar({ activeId }: { activeId: string | null }) {
   const categories = repo.getCategories();
   const { locale } = useLocale();
+  const t = useT();
   return (
     <nav
       aria-label="产品分类"
@@ -122,6 +132,13 @@ function CategoryBar({ activeId }: { activeId: string | null }) {
           {localizedName(cat, locale)}
         </Link>
       ))}
+      <Link
+        href="/downloads"
+        className="flex items-center gap-[5px] px-[14px] py-[6px] text-[14.5px] text-body whitespace-nowrap rounded transition-colors hover:bg-wash hover:text-ink ml-1 border-l border-hairline pl-[18px]"
+      >
+        <DownloadIcon />
+        {t("nav.downloads")}
+      </Link>
     </nav>
   );
 }
@@ -184,6 +201,16 @@ function MobileMenu({
               </Link>
             </li>
           ))}
+          <li>
+            <Link
+              href="/downloads"
+              onClick={onClose}
+              className="flex items-center gap-2 px-6 min-h-[44px] text-sm text-body hover:text-ink hover:bg-wash border-t border-hairline"
+            >
+              <DownloadIcon />
+              {t("nav.downloads")}
+            </Link>
+          </li>
         </ul>
       </nav>
 

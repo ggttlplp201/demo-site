@@ -307,8 +307,8 @@ export function RenderModelCompare({
       >
         <svg width="20" height="16" viewBox="0 0 20 16" fill="none" aria-hidden="true"
           style={{ filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.55)) drop-shadow(0 0 4px rgba(255,255,255,0.4))" }}>
-          <path d="M6 8H1m0 0 3.5-3.5M1 8l3.5 3.5" stroke="#1a1b1f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M14 8h5m0 0L15.5 4.5M19 8l-3.5 3.5" stroke="#1a1b1f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M6 8H1m0 0 3.5-3.5M1 8l3.5 3.5" stroke="#1a1b1f" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M14 8h5m0 0L15.5 4.5M19 8l-3.5 3.5" stroke="#1a1b1f" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
 
