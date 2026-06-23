@@ -45,7 +45,22 @@ export function ModelViewer({ src, alt }: ModelViewerProps) {
         touch-action="pan-y"
         style={{ width: "100%", height: "480px", display: "block" }}
       />
-      <div className="absolute bottom-3 right-3 flex gap-2">
+      {/* SAMPLE overlay — pointer-events-none so orbit/zoom/click pass through */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-10 pointer-events-none"
+        style={{
+          background:
+            "repeating-linear-gradient(to right, rgba(20,20,20,0.06) 0 14px, transparent 14px 28px)",
+        }}
+      >
+        <span
+          className="absolute top-2 left-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink/40 select-none"
+        >
+          {t("viewer.sample")}
+        </span>
+      </div>
+      <div className="absolute bottom-3 right-3 flex gap-2 z-20">
         <button
           aria-label={t("viewer.reset")}
           onClick={handleReset}
