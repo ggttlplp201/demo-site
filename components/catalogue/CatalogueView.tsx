@@ -45,31 +45,31 @@ export function CatalogueView() {
   const sorted = sortProducts(filtered, sort);
 
   return (
-    <main className="mx-auto max-w-[1440px] px-6 py-8">
+    <main className="mx-auto max-w-[1440px] px-4 sm:px-6 py-8">
       {/* Breadcrumb + results count */}
-      <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-xs text-aluminium-dark">{t("cat.breadcrumb")}</p>
           <p className="text-sm text-aluminium-dark">
             <span className="font-semibold text-ink">{sorted.length}</span> {t("cat.results")}
           </p>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="w-full sm:w-64">
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex-1 min-w-[160px] sm:w-64 sm:flex-none">
             <SearchBar value={query} onChange={setQuery} />
           </div>
           <SortDropdown value={sort} onChange={setSort} />
         </div>
       </div>
 
-      <div className="flex gap-8">
+      <div className="flex flex-col lg:flex-row gap-8">
         {/* Mobile filter toggle */}
-        <div className="lg:hidden">
+        <div className="lg:hidden w-full">
           <button
             onClick={() => setShowFilters(v => !v)}
             aria-expanded={showFilters}
             aria-controls="mobile-filter-panel"
-            className="mb-4 rounded border border-aluminium px-3 py-1.5 text-sm text-aluminium-dark"
+            className="mb-4 min-h-[44px] rounded border border-aluminium px-3 py-1.5 text-sm text-aluminium-dark"
           >
             {showFilters ? t("cat.mobileFilterOpen") : t("cat.mobileFilterClosed")}
           </button>

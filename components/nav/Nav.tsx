@@ -19,8 +19,8 @@ function CategoryBar({ activeId }: { activeId: string | null }) {
   const { locale } = useLocale();
   return (
     <div className="border-b border-aluminium bg-white">
-      <div className="mx-auto max-w-[1440px] px-6">
-        <ul className="flex items-center overflow-x-auto" role="list">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6">
+        <ul className="flex items-center overflow-x-auto scrollbar-none" role="list">
           {categories.map((cat, idx) => {
             const isActive = activeId === cat.id;
             return (
@@ -87,7 +87,7 @@ function MobileMenu({
               <Link
                 href={`/?category=${cat.id}`}
                 onClick={onClose}
-                className="block px-6 py-2.5 text-sm text-aluminium-dark hover:text-ink hover:bg-neutral-fill"
+                className="flex items-center px-6 min-h-[44px] text-sm text-aluminium-dark hover:text-ink hover:bg-neutral-fill"
               >
                 {localizedName(cat, locale)}
               </Link>
@@ -95,20 +95,20 @@ function MobileMenu({
           ))}
         </ul>
       </nav>
-      <div className="flex flex-col gap-2 px-6 py-3 border-t border-aluminium">
-        <Link href="/compare" onClick={onClose} className="flex items-center gap-2 text-sm text-ink py-1">
+      <div className="flex flex-col gap-1 px-6 py-3 border-t border-aluminium">
+        <Link href="/compare" onClick={onClose} className="flex items-center gap-2 text-sm text-ink min-h-[44px]">
           <CompareIcon /> {t("nav.compare")}
         </Link>
-        <Link href="/lists" onClick={onClose} className="flex items-center gap-2 text-sm text-ink py-1">
+        <Link href="/lists" onClick={onClose} className="flex items-center gap-2 text-sm text-ink min-h-[44px]">
           <BookmarkIcon /> {t("nav.savedLists")}
         </Link>
-        <Link href="/materiais" onClick={onClose} className="flex items-center gap-2 text-sm text-ink py-1">
+        <Link href="/materiais" onClick={onClose} className="flex items-center gap-2 text-sm text-ink min-h-[44px]">
           <BomListIcon /> {t("nav.materialList")}
         </Link>
-        <button className="rounded border border-aluminium px-3 py-1.5 text-sm text-left">
+        <button className="flex items-center rounded border border-aluminium px-3 min-h-[44px] text-sm text-left">
           {t("nav.login")}
         </button>
-        <div className="pt-1">
+        <div className="pt-2 pb-1">
           <LocaleToggle />
         </div>
       </div>
@@ -184,7 +184,7 @@ export function Nav() {
     <header className="sticky top-0 z-40">
       {/* Primary bar */}
       <div className="border-b border-aluminium bg-white">
-        <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-6 px-6">
+        <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-3 px-4 sm:gap-6 sm:px-6">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 font-bold text-ink flex-shrink-0">
             <span className="inline-block h-4 w-4 rotate-45 bg-brand" aria-hidden />
@@ -198,7 +198,7 @@ export function Nav() {
 
 
           {/* Right cluster */}
-          <div className="flex items-center gap-4 ml-auto md:ml-0">
+          <div className="flex items-center gap-3 ml-auto md:ml-0 sm:gap-4">
             {/* Language toggle — desktop */}
             <div className="hidden md:flex">
               <LocaleToggle />
@@ -271,7 +271,7 @@ export function Nav() {
 
             {/* Hamburger — mobile */}
             <button
-              className="md:hidden flex items-center text-ink"
+              className="md:hidden flex items-center justify-center min-h-[44px] min-w-[44px] text-ink"
               aria-label="Menu"
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((prev) => !prev)}

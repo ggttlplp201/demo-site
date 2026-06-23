@@ -159,8 +159,8 @@ export function SpecTable({ product, variant }: { product: Product; variant: Var
   if (rows.length === 0) return null;
 
   return (
-    <div className="mt-8">
-      <table className="w-full text-sm border-collapse">
+    <div className="mt-8 overflow-x-auto">
+      <table className="w-full min-w-0 text-sm border-collapse">
         <tbody>
           {rows.map((row, i) => (
             <tr

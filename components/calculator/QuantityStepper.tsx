@@ -31,7 +31,7 @@ export function QuantityStepper({ value, min, onChange }: QuantityStepperProps) 
         aria-label={t("qty.decrease")}
         onClick={decrement}
         disabled={value <= min}
-        className="w-8 h-8 flex items-center justify-center rounded border border-aluminium text-ink disabled:opacity-40"
+        className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded border border-aluminium text-ink disabled:opacity-40"
       >
         −
       </button>
@@ -47,7 +47,7 @@ export function QuantityStepper({ value, min, onChange }: QuantityStepperProps) 
         type="button"
         aria-label={t("qty.increase")}
         onClick={increment}
-        className="w-8 h-8 flex items-center justify-center rounded border border-aluminium text-ink"
+        className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded border border-aluminium text-ink"
       >
         +
       </button>

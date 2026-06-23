@@ -51,7 +51,7 @@ export function Gallery({ images, alt }: GalleryProps) {
 
   if (images.length === 0) {
     return (
-      <div className="flex items-center justify-center rounded border border-aluminium bg-neutral-fill" style={{ height: "480px" }}>
+      <div className="flex items-center justify-center rounded border border-aluminium bg-neutral-fill" style={{ height: "clamp(260px, 45vw, 480px)" }}>
         <span className="text-aluminium-dark text-sm">{alt}</span>
       </div>
     );
@@ -62,7 +62,7 @@ export function Gallery({ images, alt }: GalleryProps) {
   return (
     <div className="flex flex-col gap-3">
       {/* Main image with arrows */}
-      <div className="relative rounded border border-aluminium bg-neutral-fill overflow-hidden" style={{ height: "480px" }}>
+      <div className="relative rounded border border-aluminium bg-neutral-fill overflow-hidden" style={{ height: "clamp(260px, 45vw, 480px)" }}>
         <div ref={mainImgWrapRef} className="absolute inset-0">
           <Image
             src={mainSrc}

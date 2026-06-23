@@ -21,7 +21,7 @@ export default function CartPage() {
   return (
     <>
       <Nav />
-      <main className="mx-auto max-w-[1440px] px-6 py-10">
+      <main className="mx-auto max-w-[1440px] px-4 sm:px-6 py-10">
         <h1 className="mb-6 text-2xl font-bold text-ink">{t("quote.title")}</h1>
 
         {items.length === 0 && !submitted && (
@@ -105,16 +105,16 @@ export default function CartPage() {
               </table>
             </div>
 
-            <div className="mt-6 flex items-center justify-between">
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
               <button
                 onClick={clear}
-                className="rounded border border-aluminium px-4 py-2 text-sm text-aluminium-dark hover:bg-neutral-fill"
+                className="rounded border border-aluminium px-4 py-2 min-h-[44px] text-sm text-aluminium-dark hover:bg-neutral-fill"
               >
                 {t("common.clear")}
               </button>
               <button
                 onClick={handleSubmit}
-                className="rounded bg-brand px-6 py-2 text-sm font-medium text-white hover:opacity-90"
+                className="rounded bg-brand px-6 py-2 min-h-[44px] text-sm font-medium text-white hover:opacity-90"
               >
                 {t("quote.request")}
               </button>

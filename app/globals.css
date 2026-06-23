@@ -42,6 +42,8 @@
 body {
   background: var(--color-background);
   color: var(--color-foreground);
+  /* prevent horizontal overflow on narrow viewports */
+  overflow-x: hidden;
 }
 
 /* ─── Accessibility: focus-visible ring ─────────────────────────────────── */

@@ -150,7 +150,7 @@ export function ProductCard({ product }: { product: Product }) {
                 type="button"
                 aria-label={t("card.prevImage")}
                 onClick={handlePrev}
-                className="absolute inset-y-0 left-1 my-auto flex h-7 w-7 items-center justify-center rounded-full bg-white/70 opacity-0 shadow transition-opacity group-hover:opacity-100 hover:bg-white focus:opacity-100"
+                className="absolute inset-y-0 left-1 my-auto flex h-9 w-9 items-center justify-center rounded-full bg-white/70 shadow transition-opacity sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 hover:bg-white"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -160,14 +160,14 @@ export function ProductCard({ product }: { product: Product }) {
                 type="button"
                 aria-label={t("card.nextImage")}
                 onClick={handleNext}
-                className="absolute inset-y-0 right-1 my-auto flex h-7 w-7 items-center justify-center rounded-full bg-white/70 opacity-0 shadow transition-opacity group-hover:opacity-100 hover:bg-white focus:opacity-100"
+                className="absolute inset-y-0 right-1 my-auto flex h-9 w-9 items-center justify-center rounded-full bg-white/70 shadow transition-opacity sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 hover:bg-white"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
               {/* Dot indicator */}
-              <div className="absolute bottom-1 left-0 right-0 flex justify-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+              <div className="absolute bottom-1 left-0 right-0 flex justify-center gap-1 sm:opacity-0 sm:transition-opacity sm:group-hover:opacity-100">
                 {product.images.map((_, i) => (
                   <span
                     key={i}
@@ -210,7 +210,7 @@ export function ProductCard({ product }: { product: Product }) {
       </Link>
 
       {/* Actions row — outside the Link to avoid nested anchors */}
-      <div className="flex gap-2 px-4 pb-4">
+      <div className="flex flex-wrap gap-2 px-4 pb-4">
         <SaveButton productId={product.id} />
         <AnimatedButton
           onClick={() => toggle(product.id)}

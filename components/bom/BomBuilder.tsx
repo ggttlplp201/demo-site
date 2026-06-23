@@ -22,13 +22,13 @@ export function BomBuilder() {
   return (
     <div>
       <BomTable lines={lines} onRemove={remove} />
-      <div className="mt-4 flex items-center justify-between">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
         <div className="flex gap-3">
           <ExportButton lines={lines} />
         </div>
         <button
           onClick={clear}
-          className="rounded border border-aluminium px-4 py-2 text-sm text-aluminium-dark hover:bg-neutral-fill"
+          className="rounded border border-aluminium px-4 py-2 min-h-[44px] text-sm text-aluminium-dark hover:bg-neutral-fill"
         >
           {t("common.clear")}
         </button>

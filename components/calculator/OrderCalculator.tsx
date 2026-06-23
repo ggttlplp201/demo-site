@@ -58,13 +58,13 @@ export function OrderCalculator({ variantRef }: OrderCalculatorProps) {
       <div className="flex flex-col gap-2">
         <AnimatedButton
           onClick={() => { addToCart(variantRef, qty); analytics.track({ type: "add_to_quote", ref: variantRef }); }}
-          className="w-full rounded bg-brand px-4 py-2 text-sm font-medium text-white"
+          className="w-full rounded bg-brand px-4 py-2 min-h-[44px] text-sm font-medium text-white"
         >
           {t("order.addToQuote")}
         </AnimatedButton>
         <AnimatedButton
           onClick={() => { addToBom(variantRef, qty); analytics.track({ type: "add_to_bom", ref: variantRef }); }}
-          className="w-full rounded border border-aluminium px-4 py-2 text-sm font-medium text-ink"
+          className="w-full rounded border border-aluminium px-4 py-2 min-h-[44px] text-sm font-medium text-ink"
         >
           {t("order.addToBom")}
         </AnimatedButton>

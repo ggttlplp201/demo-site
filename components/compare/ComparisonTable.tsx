@@ -109,8 +109,8 @@ export function ComparisonTable({ productIds, onRemove }: ComparisonTableProps) 
   if (products.length === 0) return null;
 
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm border-collapse">
+    <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+      <table className="w-full min-w-[640px] text-sm border-collapse">
         <thead>
           <tr>
             <th className="py-3 px-3 text-left font-medium text-aluminium-dark w-40">{t("compare.attribute")}</th>

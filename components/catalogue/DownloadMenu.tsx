@@ -180,7 +180,7 @@ export function DownloadMenu({ product }: DownloadMenuProps) {
           ref={menuRef}
           role="menu"
           aria-label={t("download.title")}
-          className="absolute top-full left-0 z-50 mt-1 w-64 rounded border border-aluminium bg-white shadow-md"
+          className="absolute top-full left-0 z-50 mt-1 w-[min(16rem,calc(100vw-2rem))] rounded border border-aluminium bg-white shadow-md"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="border-b border-aluminium px-3 py-2">

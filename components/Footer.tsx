@@ -10,7 +10,7 @@ export function Footer() {
   return (
     <footer className="bg-ink text-white">
       {/* Main columns */}
-      <div className="mx-auto max-w-[1440px] px-6 py-12">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
           {/* Col 1: Logo + tagline */}
           <div className="flex flex-col gap-4">
@@ -110,7 +110,7 @@ export function Footer() {
 
       {/* Copyright bar */}
       <div className="border-t border-white/15">
-        <div className="mx-auto max-w-[1440px] px-6 py-4">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 py-4">
           <p className="text-xs text-white/40">
             © 2026 DoMusMat · {t("footer.rights")}
           </p>

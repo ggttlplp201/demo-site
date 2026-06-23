@@ -43,7 +43,7 @@ export function ModelViewer({ src, alt }: ModelViewerProps) {
         auto-rotate
         shadow-intensity="1"
         touch-action="pan-y"
-        style={{ width: "100%", height: "480px", display: "block" }}
+        style={{ width: "100%", height: "clamp(280px, 45vw, 480px)", display: "block" }}
       />
       {/* SAMPLE overlay — tiled diagonal watermark, pointer-events-none so orbit/zoom/click pass through */}
       <div
