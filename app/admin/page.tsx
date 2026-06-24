@@ -422,7 +422,7 @@ export default function AdminPage() {
                                         {/* Source */}
                                         {order.source && (
                                           <div>
-                                            <span className="text-aluminium-dark font-medium">Source: </span>
+                                            <span className="text-aluminium-dark font-medium">{t("admin.col.source")}: </span>
                                             <span className="text-ink">{t(`order.source.${order.source}`)}</span>
                                           </div>
                                         )}
