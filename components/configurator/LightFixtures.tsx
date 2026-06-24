@@ -1,56 +1,27 @@
 "use client";
 
 /**
- * LightFixtures — per-room interior lighting. Each light zone independently
- * shows EITHER a hanging bar OR recessed round ceiling lights (never both),
- * with its own quantity, auto-spaced across the zone.
+ * LightFixtures — per-room recessed round ceiling lights. Each light zone
+ * independently chooses how many lights (or none); they auto-space across the
+ * zone. The fixture model is laid flat just below the ceiling (autoFlat) and a
+ * downward SpotLight does the actual illumination. The emissive lens is glow only.
  *
- * Direction: both fixture types emit DOWNWARD toward the floor —
- *  - the bar's RectAreaLight is aimed straight down with lookAt()
- *  - each ceiling SpotLight targets a point 2 m below it
- * Temporary helpers (SHOW_HELPERS) visualise the emit direction.
+ * Helper cones (cyan) reveal each light's direction — toggled from the HUD.
  */
 
 import { useEffect, useRef } from "react";
-import { RectAreaLightUniformsLib } from "three/examples/jsm/lights/RectAreaLightUniformsLib.js";
-import { RectAreaLightHelper } from "three/examples/jsm/helpers/RectAreaLightHelper.js";
 import { useHelper } from "@react-three/drei";
 import * as THREE from "three";
 import type { LightZone, RoomShell } from "@/lib/configurator/types";
 import { useConfigurator } from "@/state/configurator";
 import FittedModel from "./FittedModel";
 
-RectAreaLightUniformsLib.init(); // required for RectAreaLight
-const WARM = "#ffd6a8"; // ~3200K
-const SHOW_HELPERS = true; // temporary — confirm light direction, then turn off
+const WARM = "#ffd6a8"; // ~3200K warm white
 
-// ---- hanging light bar (emits down from the underside) --------------------
-function HangingBar({ position }: { position: [number, number, number] }) {
-  const lightRef = useRef<THREE.RectAreaLight>(null!);
-  useHelper(SHOW_HELPERS ? lightRef : null, RectAreaLightHelper);
-  useEffect(() => {
-    const l = lightRef.current;
-    if (!l) return;
-    const wp = new THREE.Vector3();
-    l.getWorldPosition(wp);
-    l.lookAt(wp.x, wp.y - 1, wp.z); // emit straight down toward the floor
-  }, []);
-  return (
-    <group position={position}>
-      <group rotation={[0, 0, Math.PI / 2]}>
-        <FittedModel url="/models/hanging_light_bar.glb" realDimsMm={{ w: 1, h: 1, d: 1 }} fitMaxSize={1.5} ground={false} castShadow={false} />
-      </group>
-      {/* area light placed below the bar body, aimed down */}
-      <rectAreaLight ref={lightRef} position={[0, -0.14, 0]} width={1.3} height={0.28} intensity={6} color={WARM} />
-    </group>
-  );
-}
-
-// ---- recessed round ceiling light (spotlight straight down) ---------------
-function CeilingLight({ position }: { position: [number, number, number] }) {
+function CeilingLight({ position, helpers }: { position: [number, number, number]; helpers: boolean }) {
   const spotRef = useRef<THREE.SpotLight>(null!);
   const targetRef = useRef<THREE.Object3D>(null!);
-  useHelper(SHOW_HELPERS ? spotRef : null, THREE.SpotLightHelper, "cyan");
+  useHelper(helpers ? spotRef : null, THREE.SpotLightHelper, "cyan");
   useEffect(() => {
     const s = spotRef.current, t = targetRef.current;
     if (!s || !t) return;
@@ -59,22 +30,22 @@ function CeilingLight({ position }: { position: [number, number, number] }) {
   }, []);
   return (
     <group position={position}>
-      {/* recessed fixture model, flat & facing down */}
-      <group rotation={[Math.PI / 2, 0, 0]} position={[0, 0.02, 0]}>
-        <FittedModel url="/models/ceiling_light_round.glb" realDimsMm={{ w: 1, h: 1, d: 1 }} fitMaxSize={0.3} ground={false} castShadow={false} />
+      {/* recessed fixture model, laid flat (autoFlat), sitting just below the ceiling */}
+      <group position={[0, -0.02, 0]}>
+        <FittedModel url="/models/ceiling_light_round.glb" realDimsMm={{ w: 1, h: 1, d: 1 }} fitMaxSize={0.3} ground={false} autoFlat castShadow={false} />
       </group>
-      {/* emissive lens (glow only) */}
-      <mesh position={[0, -0.01, 0]} rotation={[Math.PI / 2, 0, 0]}>
+      {/* emissive lens (glow only), facing down */}
+      <mesh position={[0, -0.05, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <circleGeometry args={[0.085, 24]} />
         <meshStandardMaterial color="#ffffff" emissive={WARM} emissiveIntensity={2.6} toneMapped={false} />
       </mesh>
-      <spotLight ref={spotRef} position={[0, -0.05, 0]} angle={0.7} penumbra={0.6} intensity={6} distance={9} decay={1.3} color={WARM} castShadow={false} />
+      <spotLight ref={spotRef} position={[0, -0.06, 0]} angle={0.7} penumbra={0.6} intensity={6} distance={9} decay={1.3} color={WARM} castShadow={false} />
       <object3D ref={targetRef} position={[0, -2, 0]} />
     </group>
   );
 }
 
-// ---- evenly spread `count` positions across a zone ------------------------
+// evenly spread `count` positions across a zone
 function gridPositions(z: LightZone, count: number): [number, number, number][] {
   const cols = Math.min(count, 3), rows = Math.ceil(count / cols);
   const out: [number, number, number][] = [];
@@ -91,15 +62,15 @@ function gridPositions(z: LightZone, count: number): [number, number, number][] 
 
 export default function LightFixtures({ room }: { room: RoomShell }) {
   const roomLights = useConfigurator((s) => s.roomLights);
+  const helpers = useConfigurator((s) => s.showLightHelpers);
   return (
     <>
       {room.lightZones.map((z) => {
         const cfg = roomLights[z.id];
-        if (!cfg || cfg.type === "none" || cfg.count <= 0) return null;
-        const pts = gridPositions(z, cfg.count);
-        if (cfg.type === "bar")
-          return pts.map((p, i) => <HangingBar key={`${z.id}-bar-${i}`} position={[p[0], z.ceilingY - 0.85, p[2]]} />);
-        return pts.map((p, i) => <CeilingLight key={`${z.id}-c-${i}`} position={p} />);
+        if (!cfg || cfg.type !== "ceiling" || cfg.count <= 0) return null;
+        return gridPositions(z, cfg.count).map((p, i) => (
+          <CeilingLight key={`${z.id}-${i}`} position={p} helpers={helpers} />
+        ));
       })}
     </>
   );

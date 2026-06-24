@@ -8,7 +8,7 @@ export type Tool =
   | { kind: "paint"; material: string }
   | { kind: "place"; ref: string };
 
-export type LightType = "none" | "ceiling" | "bar";
+export type LightType = "none" | "ceiling";
 export interface LightConfig { type: LightType; count: number; }
 
 let idCounter = 0;
@@ -21,6 +21,7 @@ interface ConfiguratorState {
   editingId: string | null;
   timeOfDay: number;                 // hours, 6..20 (drives the sun direction)
   roomLights: Record<string, LightConfig>;  // per-zone interior lighting
+  showLightHelpers: boolean;         // reveal light-direction helpers
   loadScene(doc: SceneDocument): void;
   setTool(tool: Tool): void;
   paintSurface(surfaceId: string, materialId: string): void;
@@ -38,6 +39,7 @@ interface ConfiguratorState {
   clearSlot(slotId: string): void;
   setTimeOfDay(hours: number): void;
   setRoomLight(zoneId: string, cfg: LightConfig): void;
+  setShowLightHelpers(v: boolean): void;
 }
 
 export const useConfigurator = create<ConfiguratorState>((set) => ({
@@ -47,6 +49,7 @@ export const useConfigurator = create<ConfiguratorState>((set) => ({
   editingId: null,
   timeOfDay: 9,
   roomLights: { living: { type: "ceiling", count: 6 } },
+  showLightHelpers: false,
 
   loadScene: (doc) => set({ scene: doc, selectedId: null, editingId: null, tool: { kind: "look" } }),
   setTool: (tool) => set({ tool, selectedId: null }),
@@ -100,4 +103,5 @@ export const useConfigurator = create<ConfiguratorState>((set) => ({
 
   setTimeOfDay: (hours) => set({ timeOfDay: hours }),
   setRoomLight: (zoneId, cfg) => set((st) => ({ roomLights: { ...st.roomLights, [zoneId]: cfg } })),
+  setShowLightHelpers: (v) => set({ showLightHelpers: v }),
 }));

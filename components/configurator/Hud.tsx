@@ -25,6 +25,8 @@ export default function Hud({ room, palette }: HudProps) {
   const setTimeOfDay = useConfigurator((s) => s.setTimeOfDay);
   const roomLights   = useConfigurator((s) => s.roomLights);
   const setRoomLight = useConfigurator((s) => s.setRoomLight);
+  const showLightHelpers    = useConfigurator((s) => s.showLightHelpers);
+  const setShowLightHelpers = useConfigurator((s) => s.setShowLightHelpers);
   const [zoneId, setZoneId] = useState(room.lightZones[0]?.id ?? "");
   const zoneCfg = roomLights[zoneId] ?? { type: "none" as LightType, count: 0 };
 
@@ -91,21 +93,21 @@ export default function Hud({ room, palette }: HudProps) {
               <option key={z.id} value={z.id}>{z.label}</option>
             ))}
           </select>
-          {(["none", "ceiling", "bar"] as LightType[]).map((t) => (
+          {(["none", "ceiling"] as LightType[]).map((t) => (
             <button
               key={t}
-              onClick={() => setRoomLight(zoneId, { type: t, count: t === "none" ? 0 : zoneCfg.count || (t === "bar" ? 1 : 6) })}
+              onClick={() => setRoomLight(zoneId, { type: t, count: t === "none" ? 0 : zoneCfg.count || 6 })}
               className={`px-2 py-0.5 rounded ${zoneCfg.type === t ? "bg-white text-black" : "bg-black/40 border border-white/30 hover:border-white/70"}`}
             >
-              {t === "none" ? "Off" : t === "ceiling" ? "Ceiling" : "Bar"}
+              {t === "none" ? "Off" : "Ceiling"}
             </button>
           ))}
-          {zoneCfg.type !== "none" && (
+          {zoneCfg.type === "ceiling" && (
             <span className="flex items-center gap-1">
-              {(zoneCfg.type === "bar" ? [1, 2, 3] : [3, 6, 9]).map((n) => (
+              {[3, 6, 9].map((n) => (
                 <button
                   key={n}
-                  onClick={() => setRoomLight(zoneId, { type: zoneCfg.type, count: n })}
+                  onClick={() => setRoomLight(zoneId, { type: "ceiling", count: n })}
                   className={`px-1.5 py-0.5 rounded ${zoneCfg.count === n ? "bg-white text-black" : "bg-black/40 border border-white/30"}`}
                 >
                   {n}
@@ -113,6 +115,13 @@ export default function Hud({ room, palette }: HudProps) {
               ))}
             </span>
           )}
+          <button
+            onClick={() => setShowLightHelpers(!showLightHelpers)}
+            title="Show light direction cones"
+            className={`px-2 py-0.5 rounded ${showLightHelpers ? "bg-white text-black" : "bg-black/40 border border-white/30 hover:border-white/70"}`}
+          >
+            Cones
+          </button>
         </div>
       </div>
 
