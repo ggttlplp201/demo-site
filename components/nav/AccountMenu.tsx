@@ -13,7 +13,7 @@ export function AccountMenu({ variant }: { variant: "desktop" | "mobile" }) {
       : "flex items-center rounded border border-ink px-3 min-h-[44px] text-sm text-left hover:bg-ink hover:text-white transition-colors";
 
   if (loading) {
-    return variant === "desktop" ? <span className="hidden md:inline-flex ml-2 h-10 w-24" aria-hidden /> : null;
+    return variant === "desktop" ? <span className="hidden md:inline-flex ml-2 h-10 w-24" aria-hidden="true" /> : null;
   }
 
   if (!user) {

@@ -54,7 +54,7 @@ export default function RegisterPage() {
           </label>
           <label className="text-sm text-body">{t("auth.register.country")}
             <select className={field} value={country} onChange={(e) => setCountry(e.target.value)} required>
-              <option value="" disabled>{t("auth.register.countryPlaceholder")}</option>
+              <option value="" disabled hidden>{t("auth.register.countryPlaceholder")}</option>
               {COUNTRIES.map((c) => (
                 <option key={c.code} value={c.code}>{countryName(c.code, locale)}</option>
               ))}
