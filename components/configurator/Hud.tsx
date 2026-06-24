@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { useConfigurator } from "@/state/configurator";
+import { useEffect, useState } from "react";
+import { useConfigurator, type LightType } from "@/state/configurator";
 import { MATERIALS } from "@/lib/configurator/products";
 import { encodeScene } from "@/lib/configurator/serialize";
 import type { RoomShell, ProductMeta } from "@/lib/configurator/types";
@@ -11,7 +11,7 @@ interface HudProps {
   palette: ProductMeta[];
 }
 
-export default function Hud({ palette }: HudProps) {
+export default function Hud({ room, palette }: HudProps) {
   const scene      = useConfigurator((s) => s.scene);
   const tool       = useConfigurator((s) => s.tool);
   const selectedId = useConfigurator((s) => s.selectedId);
@@ -21,10 +21,12 @@ export default function Hud({ palette }: HudProps) {
   const deleteItem = useConfigurator((s) => s.deleteItem);
   const saveEdit   = useConfigurator((s) => s.saveEdit);
   const escape     = useConfigurator((s) => s.escape);
-  const timeOfDay          = useConfigurator((s) => s.timeOfDay);
-  const setTimeOfDay       = useConfigurator((s) => s.setTimeOfDay);
-  const ceilingLightCount  = useConfigurator((s) => s.ceilingLightCount);
-  const setCeilingLightCount = useConfigurator((s) => s.setCeilingLightCount);
+  const timeOfDay    = useConfigurator((s) => s.timeOfDay);
+  const setTimeOfDay = useConfigurator((s) => s.setTimeOfDay);
+  const roomLights   = useConfigurator((s) => s.roomLights);
+  const setRoomLight = useConfigurator((s) => s.setRoomLight);
+  const [zoneId, setZoneId] = useState(room.lightZones[0]?.id ?? "");
+  const zoneCfg = roomLights[zoneId] ?? { type: "none" as LightType, count: 0 };
 
   // ---- keyboard shortcuts (client-side only, inside useEffect) ---------------
   useEffect(() => {
@@ -78,17 +80,39 @@ export default function Hud({ palette }: HudProps) {
           />
           <span className="tabular-nums w-9">{fmtTime(timeOfDay)}</span>
         </label>
-        <div className="flex items-center gap-1.5 text-xs">
-          <span className="opacity-70">💡 Ceiling</span>
-          {[0, 3, 6, 9].map((n) => (
+        <div className="flex items-center gap-2 text-xs">
+          <span className="opacity-70">💡</span>
+          <select
+            value={zoneId}
+            onChange={(e) => setZoneId(e.target.value)}
+            className="max-w-[9rem] rounded border border-white/20 bg-black/40 px-1 py-0.5"
+          >
+            {room.lightZones.map((z) => (
+              <option key={z.id} value={z.id}>{z.label}</option>
+            ))}
+          </select>
+          {(["none", "ceiling", "bar"] as LightType[]).map((t) => (
             <button
-              key={n}
-              onClick={() => setCeilingLightCount(n)}
-              className={`px-2 py-0.5 rounded ${ceilingLightCount === n ? "bg-white text-black" : "bg-black/40 border border-white/30 hover:border-white/70"}`}
+              key={t}
+              onClick={() => setRoomLight(zoneId, { type: t, count: t === "none" ? 0 : zoneCfg.count || (t === "bar" ? 1 : 6) })}
+              className={`px-2 py-0.5 rounded ${zoneCfg.type === t ? "bg-white text-black" : "bg-black/40 border border-white/30 hover:border-white/70"}`}
             >
-              {n}
+              {t === "none" ? "Off" : t === "ceiling" ? "Ceiling" : "Bar"}
             </button>
           ))}
+          {zoneCfg.type !== "none" && (
+            <span className="flex items-center gap-1">
+              {(zoneCfg.type === "bar" ? [1, 2, 3] : [3, 6, 9]).map((n) => (
+                <button
+                  key={n}
+                  onClick={() => setRoomLight(zoneId, { type: zoneCfg.type, count: n })}
+                  className={`px-1.5 py-0.5 rounded ${zoneCfg.count === n ? "bg-white text-black" : "bg-black/40 border border-white/30"}`}
+                >
+                  {n}
+                </button>
+              ))}
+            </span>
+          )}
         </div>
       </div>
 

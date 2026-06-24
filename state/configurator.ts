@@ -8,6 +8,9 @@ export type Tool =
   | { kind: "paint"; material: string }
   | { kind: "place"; ref: string };
 
+export type LightType = "none" | "ceiling" | "bar";
+export interface LightConfig { type: LightType; count: number; }
+
 let idCounter = 0;
 export function __resetItemIds() { idCounter = 0; } // tests only
 
@@ -17,7 +20,7 @@ interface ConfiguratorState {
   selectedId: string | null;
   editingId: string | null;
   timeOfDay: number;                 // hours, 6..20 (drives the sun direction)
-  ceilingLightCount: number;         // number of recessed ceiling lights shown
+  roomLights: Record<string, LightConfig>;  // per-zone interior lighting
   loadScene(doc: SceneDocument): void;
   setTool(tool: Tool): void;
   paintSurface(surfaceId: string, materialId: string): void;
@@ -34,7 +37,7 @@ interface ConfiguratorState {
   assignSlot(slotId: string, ref: string): void;
   clearSlot(slotId: string): void;
   setTimeOfDay(hours: number): void;
-  setCeilingLightCount(n: number): void;
+  setRoomLight(zoneId: string, cfg: LightConfig): void;
 }
 
 export const useConfigurator = create<ConfiguratorState>((set) => ({
@@ -43,7 +46,7 @@ export const useConfigurator = create<ConfiguratorState>((set) => ({
   selectedId: null,
   editingId: null,
   timeOfDay: 9,
-  ceilingLightCount: 6,
+  roomLights: { living: { type: "ceiling", count: 6 } },
 
   loadScene: (doc) => set({ scene: doc, selectedId: null, editingId: null, tool: { kind: "look" } }),
   setTool: (tool) => set({ tool, selectedId: null }),
@@ -96,5 +99,5 @@ export const useConfigurator = create<ConfiguratorState>((set) => ({
     }),
 
   setTimeOfDay: (hours) => set({ timeOfDay: hours }),
-  setCeilingLightCount: (n) => set({ ceilingLightCount: n }),
+  setRoomLight: (zoneId, cfg) => set((st) => ({ roomLights: { ...st.roomLights, [zoneId]: cfg } })),
 }));

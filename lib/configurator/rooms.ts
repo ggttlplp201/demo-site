@@ -1,5 +1,5 @@
 import type * as THREE_NS from "three";
-import type { Fixture, ItemSlot, RoomShell, SurfaceDef, SurfaceKind } from "./types";
+import type { Fixture, ItemSlot, LightZone, RoomShell, SurfaceDef, SurfaceKind } from "./types";
 
 const FT = 0.3048;
 const W = 40 * FT;   // 12.19 m  (x, west→east)
@@ -164,18 +164,23 @@ export function primitiveHouse(): RoomShell {
     return { id: `win-${idx}`, modelUrl: WIN_URL, pos: [x, midY, pz((a + b) / 2)], rotY: Math.PI / 2, realDimsMm: dims, ground: false, uniform: true };
   });
 
-  // recessed ceiling-light grid over the open living area (rows ordered centre→front→back
-  // so 3/6/9 lights stay sensibly spread); first N are shown per the user's quantity choice
+  // per-room lighting zones (world bounds inset from walls); each can hold bar or ceiling lights
   const ceilY = H - 0.02;
-  const ceilingLightAnchors: [number, number, number][] = [];
-  for (const yft of [9, 4, 14]) for (const xft of [7, 17, 27]) ceilingLightAnchors.push([px(xft), ceilY, pz(yft)]);
+  const zone = (id: string, label: string, xa: number, ya: number, xb: number, yb: number): LightZone =>
+    ({ id, label, x0: px(xa), z0: pz(yb), x1: px(xb), z1: pz(ya), ceilingY: ceilY });
+  const lightZones: LightZone[] = [
+    zone("living",   "Living / Dining / Kitchen", 2, 1, 33, 16),
+    zone("bedroom2", "Bedroom #2",                1, 19, 8, 29),
+    zone("bedroom3", "Bedroom #3",                14, 19, 21, 29),
+    zone("master",   "Master Bedroom",            28, 19, 39, 29),
+  ];
 
   return {
     id: "house-40x30",
     surfaces,
     slots,
     fixtures,
-    ceilingLightAnchors,
+    lightZones,
     bounds: { min: [-HX, -HZ], max: [HX, HZ] },
     eyeHeight: 1.6,
     defaultMaterials,
@@ -203,7 +208,7 @@ export function roomShellFromGltf(root: THREE_NS.Object3D, id: string): RoomShel
       normal: ud.normal ?? (kind === "floor" ? [0, 1, 0] : kind === "ceiling" ? [0, -1, 0] : [0, 0, 1]),
     });
   });
-  return { id, surfaces, slots: [], fixtures: [], ceilingLightAnchors: [], bounds: { min: [-HX, -HZ], max: [HX, HZ] }, eyeHeight: 1.6, defaultMaterials: {} };
+  return { id, surfaces, slots: [], fixtures: [], lightZones: [], bounds: { min: [-HX, -HZ], max: [HX, HZ] }, eyeHeight: 1.6, defaultMaterials: {} };
 }
 
 export function getRoomShell(id: string, gltf?: THREE_NS.Object3D): RoomShell {

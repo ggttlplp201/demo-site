@@ -34,12 +34,20 @@ export interface Fixture {
   uniform?: boolean;                 // true → uniform scale (fit inside, no distortion)
 }
 
+/** A room area that can hold its own interior lighting (bar or ceiling lights). */
+export interface LightZone {
+  id: string;
+  label: string;
+  x0: number; z0: number; x1: number; z1: number; // world bounds for placing lights
+  ceilingY: number;
+}
+
 export interface RoomShell {
   id: string;
   surfaces: SurfaceDef[];
   slots: ItemSlot[];                                         // preset item locations
   fixtures: Fixture[];                                       // fixed décor (windows, …)
-  ceilingLightAnchors: [number, number, number][];          // preset recessed-light grid (first N shown)
+  lightZones: LightZone[];                                   // per-room lighting areas
   bounds: { min: [number, number]; max: [number, number] }; // walkable x/z extent (m)
   eyeHeight: number;                                         // m
   defaultMaterials: Record<string, string>;                 // surfaceId -> materialId
