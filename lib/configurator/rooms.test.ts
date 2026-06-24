@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { primitiveHouse, getRoomShell } from "./rooms";
+import { primitiveHouse, getRoomShell, roomShellFromGltf } from "./rooms";
 
 describe("primitiveHouse", () => {
   it("exposes per-room floor zones, walls and a ceiling", () => {
@@ -18,5 +18,23 @@ describe("primitiveHouse", () => {
   });
   it("getRoomShell falls back to the primitive house for the default id", () => {
     expect(getRoomShell("house-40x30").surfaces.length).toBeGreaterThan(0);
+  });
+});
+
+describe("roomShellFromGltf", () => {
+  it("builds surfaces only from meshes, skipping non-mesh nodes with matching names", () => {
+    const fakeRoot = {
+      traverse(cb: (o: any) => void) {
+        [
+          { name: "floor-master", isMesh: true, position: { x: 0, y: 0, z: 0 }, userData: {} },
+          { name: "floor-entry", isMesh: false, position: { x: 1, y: 0, z: 1 }, userData: {} }, // a Group — must be skipped
+          { name: "wall-north", isMesh: true, position: { x: 0, y: 1, z: -4 }, userData: {} },
+          { name: "Light", isMesh: false, position: { x: 0, y: 2, z: 0 }, userData: {} },
+        ].forEach(cb);
+      },
+    } as unknown as Parameters<typeof roomShellFromGltf>[0];
+    const shell = roomShellFromGltf(fakeRoot, "house-40x30");
+    const ids = shell.surfaces.map((s) => s.id);
+    expect(ids).toEqual(["floor-master", "wall-north"]);
   });
 });

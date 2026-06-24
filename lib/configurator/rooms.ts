@@ -50,6 +50,7 @@ const SURFACE_PREFIX: Record<string, SurfaceKind> = { floor: "floor", wall: "wal
 export function roomShellFromGltf(root: THREE_NS.Object3D, id: string): RoomShell {
   const surfaces: SurfaceDef[] = [];
   root.traverse((o) => {
+    if (!(o as { isMesh?: boolean }).isMesh) return; // surfaces come from meshes only
     const kindKey = o.name.split("-")[0];
     const kind = SURFACE_PREFIX[kindKey];
     if (!kind) return;
