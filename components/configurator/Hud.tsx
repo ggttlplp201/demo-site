@@ -69,8 +69,8 @@ export default function Hud({ room, palette }: HudProps) {
 
   return (
     <>
-      {/* ---- bottom control bar: time of day + ceiling lights ---- */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-5 rounded-lg bg-black/55 backdrop-blur px-4 py-2">
+      {/* ---- top control bar: time of day + per-room lights ---- */}
+      <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-5 rounded-lg bg-black/55 backdrop-blur px-4 py-2">
         <label className="flex items-center gap-2 text-xs">
           <span className="opacity-70">🕑 Time</span>
           <input
@@ -195,7 +195,7 @@ export default function Hud({ room, palette }: HudProps) {
 
       {/* ---- edit-mode banner ---- */}
       {editingItem && (
-        <div className="absolute top-3 left-1/2 -translate-x-1/2 flex items-center gap-3 px-4 py-2 rounded-lg bg-emerald-600/90 backdrop-blur shadow-lg">
+        <div className="absolute top-16 left-1/2 -translate-x-1/2 flex items-center gap-3 px-4 py-2 rounded-lg bg-emerald-600/90 backdrop-blur shadow-lg">
           <span className="text-sm font-medium">
             🔒 Moving — drag to reposition
           </span>
@@ -222,14 +222,14 @@ export default function Hud({ room, palette }: HudProps) {
 
       {/* ---- selected (not editing) hint ---- */}
       {selectedId && !editingId && (
-        <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded bg-black/70 text-xs">
+        <div className="absolute top-16 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded bg-black/70 text-xs">
           Selected — <b>double-click</b> the item to move it · R rotate · ⌫ delete
         </div>
       )}
 
       {/* ---- add / paint-mode banner ---- */}
       {!editingId && !selectedId && tool.kind !== "look" && (
-        <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded bg-black/70 text-xs">
+        <div className="absolute top-16 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded bg-black/70 text-xs">
           {tool.kind === "place" ? (
             <>
               Adding — click a valid surface
