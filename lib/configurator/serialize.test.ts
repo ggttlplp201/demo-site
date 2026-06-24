@@ -24,4 +24,27 @@ describe("scene serialization", () => {
   it("returns null on garbage", () => {
     expect(decodeScene("not-valid-base64!!")).toBeNull();
   });
+
+  // Shape validation tests
+  it("returns null when items is null (valid JSON, wrong shape)", () => {
+    const malformed = encodeURIComponent(btoa(JSON.stringify({ room: "x", surfaces: {}, items: null })));
+    expect(decodeScene(malformed)).toBeNull();
+  });
+  it("returns null when room is missing", () => {
+    const malformed = encodeURIComponent(btoa(JSON.stringify({ surfaces: {}, items: [] })));
+    expect(decodeScene(malformed)).toBeNull();
+  });
+  it("returns null when surfaces is null", () => {
+    const malformed = encodeURIComponent(btoa(JSON.stringify({ room: "x", surfaces: null, items: [] })));
+    expect(decodeScene(malformed)).toBeNull();
+  });
+  it("returns null when top-level value is null (JSON.parse('null'))", () => {
+    const malformed = encodeURIComponent(btoa("null"));
+    expect(decodeScene(malformed)).toBeNull();
+  });
+  it("returns null when encoded via cast of wrong-shape object", () => {
+    // encodeScene would enforce types, so manually craft it
+    const wrongShape = encodeURIComponent(btoa(JSON.stringify({ room: "x" })));
+    expect(decodeScene(wrongShape)).toBeNull();
+  });
 });
