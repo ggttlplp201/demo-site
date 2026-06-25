@@ -25,12 +25,17 @@ export function isValidSpec(v: unknown): v is TourSpec {
   );
 }
 
-export async function createTourJob(spec: TourSpec): Promise<string> {
+export async function createTourJob(
+  spec: TourSpec,
+  opts: { phase?: "browser" | "cycles"; sceneUrl?: string } = {},
+): Promise<string> {
   const res = await fetch("/api/render-tour", {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ spec }),
+    body: JSON.stringify({ spec, phase: opts.phase ?? "browser", sceneUrl: opts.sceneUrl }),
   });
+  if (res.status === 503) throw new Error("photoreal-unconfigured");
+  if (res.status === 409) throw new Error("photoreal-inflight");
   if (!res.ok) throw new Error(`createTourJob failed: ${res.status}`);
   const { jobId } = (await res.json()) as { jobId: string };
   return jobId;

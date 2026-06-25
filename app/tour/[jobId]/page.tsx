@@ -12,12 +12,14 @@ export default function TourPage({ params }: { params: Promise<{ jobId: string }
   useEffect(() => {
     let alive = true;
     let timer: ReturnType<typeof setTimeout>;
+    const start = Date.now();
     const poll = async () => {
       try {
         const j = await getTourJob(jobId);
         if (!alive) return;
         if (j.status === "ready") return setJob(j);
         if (j.status === "error") return setErr(j.error ?? "render failed");
+        if (Date.now() - start > 15 * 60 * 1000) return setErr("Render timed out — please try again.");
         timer = setTimeout(poll, 1500); // still queued/rendering
       } catch (e) {
         if (alive) setErr(e instanceof Error ? e.message : "failed to load tour");

@@ -7,6 +7,7 @@ import { encodeScene } from "@/lib/configurator/serialize";
 import type { RoomShell, ProductMeta } from "@/lib/configurator/types";
 import Minimap from "./Minimap";
 import { useGenerateTour } from "@/lib/configurator/useGenerateTour";
+import { useGeneratePhotoreal } from "@/lib/configurator/useGeneratePhotoreal";
 
 interface HudProps {
   room: RoomShell;
@@ -32,6 +33,7 @@ export default function Hud({ room, palette }: HudProps) {
   const [zoneId, setZoneId] = useState(room.lightZones[0]?.id ?? "");
   const zoneCfg = roomLights[zoneId] ?? { type: "none" as LightType, count: 0 };
   const tour = useGenerateTour(room);
+  const photo = useGeneratePhotoreal(room);
 
   // ---- keyboard shortcuts (client-side only, inside useEffect) ---------------
   useEffect(() => {
@@ -72,7 +74,10 @@ export default function Hud({ room, palette }: HudProps) {
     return `${h}:${m === 0 ? "00" : m}`;
   };
 
-  const rendering = tour.phase === "capturing" || tour.phase === "uploading";
+  const rendering =
+    tour.phase === "capturing" || tour.phase === "uploading" ||
+    photo.phase === "exporting" || photo.phase === "uploading";
+  const overlayNote = photo.phase !== "idle" && photo.phase !== "error" ? photo.note : tour.note;
 
   return (
     <>
@@ -82,7 +87,7 @@ export default function Hud({ room, palette }: HudProps) {
           <div className="h-12 w-12 animate-spin rounded-full border-[3px] border-white/25 border-t-white" />
           <div className="text-center">
             <p className="text-sm font-medium tracking-wide text-white">Rendering your 360° walkthrough</p>
-            <p className="mt-1 text-xs text-white/60">{tour.note || "Preparing…"}</p>
+            <p className="mt-1 text-xs text-white/60">{overlayNote || "Preparing…"}</p>
           </div>
           <p className="mt-1 max-w-xs text-center text-[11px] leading-relaxed text-white/40">
             Capturing day and night panoramas — this can take a moment. Please keep this tab open.
@@ -236,6 +241,16 @@ export default function Hud({ room, palette }: HudProps) {
           {tour.phase === "error" && (
             <p className="mt-1 text-xs text-red-300">{tour.error}</p>
           )}
+          <button
+            className="mt-1 w-full px-3 py-1.5 rounded text-sm bg-purple-600/80 hover:bg-purple-500 text-white border border-purple-400/30 transition disabled:opacity-50"
+            onClick={photo.generate}
+            disabled={photo.phase === "exporting" || photo.phase === "uploading"}
+          >
+            {photo.phase === "exporting" ? "Exporting…"
+              : photo.phase === "uploading" ? "Uploading…"
+              : "Photoreal walkthrough"}
+          </button>
+          {photo.phase === "error" && <p className="mt-1 text-xs text-amber-300">{photo.error}</p>}
         </div>
       </div>
 
