@@ -9,9 +9,9 @@ import os
 import sys
 import urllib.request
 
-# production quality (GPU-rendered): 4K equirect, denoised
+# production quality (GPU-rendered): 4K equirect, adaptive-sampled + denoised
 PANO_W, PANO_H = 4096, 2048
-SAMPLES = 128
+SAMPLES = 96  # max; adaptive sampling stops early on converged pixels
 VARIANTS = ("day", "night")
 # glTF stores light intensity in candela; Blender imports that as a tiny wattage
 # (a 13cd spot → ~0.24W), so interior lights barely register. Scale them up.
@@ -146,6 +146,8 @@ def _setup_render():
     scene.render.engine = "CYCLES"
     _enable_gpu(scene)
     scene.cycles.samples = SAMPLES
+    scene.cycles.use_adaptive_sampling = True
+    scene.cycles.adaptive_threshold = 0.02  # higher = stops sooner (faster, denoiser cleans up)
     scene.cycles.use_denoising = True
     scene.render.resolution_x = PANO_W
     scene.render.resolution_y = PANO_H
