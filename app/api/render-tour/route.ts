@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { isValidSpec } from "@/lib/configurator/tourJobs";
-import { photorealEnabled, hdriUrls } from "@/lib/configurator/photoreal";
+import { photorealEnabled, hdriUrls, requestOrigin } from "@/lib/configurator/photoreal";
 
 export async function POST(req: Request) {
   const supabase = await createClient();
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
   if (phase === "cycles") {
-    const origin = new URL(req.url).origin;
+    const origin = requestOrigin(req);
     // fire-and-forget; the worker drives the job to ready/error
     fetch(process.env.MODAL_RENDER_URL!, {
       method: "POST",
