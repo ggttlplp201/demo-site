@@ -9,9 +9,9 @@ import os
 import sys
 import urllib.request
 
-# test settings — fast + cheap to validate the pipeline; raise once GPU is confirmed
-PANO_W, PANO_H = 2048, 1024
-SAMPLES = 64
+# production quality (GPU-rendered): 4K equirect, denoised
+PANO_W, PANO_H = 4096, 2048
+SAMPLES = 128
 VARIANTS = ("day", "night")
 # glTF stores light intensity in candela; Blender imports that as a tiny wattage
 # (a 13cd spot → ~0.24W), so interior lights barely register. Scale them up.
