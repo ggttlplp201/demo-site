@@ -46,6 +46,19 @@ export async function uploadPano(jobId: string, spotId: string, variant: TourVar
   return supabase.storage.from("tours").getPublicUrl(path).data.publicUrl;
 }
 
+export async function uploadSceneGlb(buf: ArrayBuffer): Promise<string> {
+  const supabase = createClient();
+  const path = `scenes/${crypto.randomUUID()}.glb`;
+  const { error } = await supabase.storage
+    .from("tours")
+    .upload(path, new Blob([buf], { type: "model/gltf-binary" }), {
+      contentType: "model/gltf-binary",
+      upsert: true,
+    });
+  if (error) throw new Error(`uploadSceneGlb failed: ${error.message}`);
+  return supabase.storage.from("tours").getPublicUrl(path).data.publicUrl;
+}
+
 export async function finalizeTourJob(jobId: string, panoUrls: PanoUrls): Promise<void> {
   const res = await fetch("/api/render-tour", {
     method: "PATCH",

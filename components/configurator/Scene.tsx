@@ -33,6 +33,7 @@ import SlotMarkers from "./SlotMarkers";
 import Fixtures from "./Fixtures";
 import LightFixtures from "./LightFixtures";
 import PanoCapture from "./PanoCapture";
+import SceneExporter from "./SceneExporter";
 
 // ---- time-of-day sun (real moving direction, not just brightness) ---------
 function Sun() {
@@ -185,6 +186,8 @@ function SceneInner({ room, onSlotClick }: { room: RoomShell; onSlotClick: (slot
       <CameraTracker />
       {/* offscreen 360 capture for the tour */}
       <PanoCapture />
+      {/* offscreen .glb export for the photoreal (cloud) render */}
+      <SceneExporter />
       {/* low fill so deep-interior corners aren't crushed (HDRI does the rest) */}
       <ambientLight intensity={0.16} />
 
