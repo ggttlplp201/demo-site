@@ -22,7 +22,8 @@ export default function TourViewer({ job }: { job: RenderJob }) {
     const yawTo = (fromId: string, toId: string) => {
       const a = posById.get(fromId)!;
       const b = posById.get(toId)!;
-      return Math.atan2(b[0] - a[0], b[2] - a[2]);
+      // x negated to match the un-mirrored equirect (see equirect.ts)
+      return Math.atan2(a[0] - b[0], b[2] - a[2]);
     };
     return spots
       .filter((s) => urls[s.id])

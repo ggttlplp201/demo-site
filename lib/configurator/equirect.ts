@@ -21,7 +21,8 @@ const QUAD_FRAG = /* glsl */ `
   void main() {
     float lon = (vUv.x - 0.5) * 2.0 * PI; // -PI..PI
     float lat = (vUv.y - 0.5) * PI;       // -PI/2..PI/2
-    vec3 dir = vec3(cos(lat) * sin(lon), sin(lat), cos(lat) * cos(lon));
+    // negate east-west (x) so the pano matches the configurator (cubemaps are left-handed)
+    vec3 dir = vec3(-cos(lat) * sin(lon), sin(lat), cos(lat) * cos(lon));
     gl_FragColor = textureCube(map, normalize(dir));
   }
 `;
