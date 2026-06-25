@@ -39,7 +39,7 @@ export default function TourViewer({ job }: { job: RenderJob }) {
       container: ref.current,
       navbar: ["zoom", "fullscreen"],
       plugins: [
-        [VirtualTourPlugin, { positionMode: "manual", renderMode: "markers", nodes, startNodeId: nodes[0]?.id }],
+        [VirtualTourPlugin, { positionMode: "manual", renderMode: "2d", nodes, startNodeId: nodes[0]?.id }],
       ],
     });
     return () => viewer.destroy();
