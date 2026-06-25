@@ -39,7 +39,7 @@ function CeilingLight({ position, helpers }: { position: [number, number, number
         <circleGeometry args={[0.085, 24]} />
         <meshStandardMaterial color="#ffffff" emissive={WARM} emissiveIntensity={2.6} toneMapped={false} />
       </mesh>
-      <spotLight ref={spotRef} position={[0, -0.06, 0]} angle={0.7} penumbra={0.6} intensity={6} distance={9} decay={1.3} color={WARM} castShadow={false} />
+      <spotLight ref={spotRef} position={[0, -0.06, 0]} angle={0.85} penumbra={0.85} intensity={3} distance={9} decay={1.4} color={WARM} castShadow={false} />
       <object3D ref={targetRef} position={[0, -2, 0]} />
     </group>
   );

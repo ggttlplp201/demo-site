@@ -67,13 +67,13 @@ export default function ConfiguratorPage() {
           shadows
           camera={{ fov: 70, near: 0.05, far: 100 }}
           dpr={[1, 1.75]}
-          gl={{ toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 0.85 }}
+          gl={{ toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 0.55 }}
         >
           <Scene room={room} onSlotClick={setPickerSlot} />
           {/* tasteful polish: ambient occlusion + bloom + anti-aliasing */}
           <EffectComposer enableNormalPass multisampling={0}>
             <N8AO halfRes aoRadius={0.5} intensity={1.6} distanceFalloff={1} color="black" />
-            <Bloom luminanceThreshold={0.9} luminanceSmoothing={0.25} intensity={0.5} mipmapBlur />
+            <Bloom luminanceThreshold={1.05} luminanceSmoothing={0.2} intensity={0.28} mipmapBlur />
             <SMAA />
           </EffectComposer>
         </Canvas>
