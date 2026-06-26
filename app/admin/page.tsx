@@ -199,12 +199,18 @@ export default function AdminPage() {
 
         {!loading && role === "manager" && (
           <>
-            <div className="mb-6">
+            <div className="mb-6 flex flex-wrap gap-3">
               <Link
                 href="/admin/products"
                 className="inline-block rounded bg-ink px-4 py-2 text-sm font-semibold text-white"
               >
                 {t("admin.prod.nav")} →
+              </Link>
+              <Link
+                href="/admin/specify"
+                className="inline-block rounded border border-ink px-4 py-2 text-sm font-semibold text-ink"
+              >
+                {t("spec.nav")} →
               </Link>
             </div>
 
