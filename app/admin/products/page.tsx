@@ -29,6 +29,7 @@ export default function AdminProductsPage() {
   const [busyId, setBusyId] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const [sortKey, setSortKey] = useState<"name" | "category" | "status" | "variants">("name");
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -51,8 +52,22 @@ export default function AdminProductsPage() {
     return c ? localizedName(c, locale) : id;
   };
 
-  // non-mutating sort for display
-  const sortedRows = [...rows].sort((a, b) => {
+  const realRefs = (r: ProductRow) =>
+    (r.product_variants ?? []).map((v) => v.ref).filter((ref) => ref && ref !== "PLACEHOLDER");
+
+  // filter by name / SKU / category / slug, then non-mutating sort
+  const q = query.trim().toLowerCase();
+  const filteredRows = q
+    ? rows.filter(
+        (r) =>
+          localizedName(r, locale).toLowerCase().includes(q) ||
+          catName(r.category).toLowerCase().includes(q) ||
+          r.id.toLowerCase().includes(q) ||
+          realRefs(r).some((ref) => ref.toLowerCase().includes(q)),
+      )
+    : rows;
+
+  const sortedRows = [...filteredRows].sort((a, b) => {
     switch (sortKey) {
       case "category":
         return catName(a.category).localeCompare(catName(b.category));
@@ -92,6 +107,16 @@ export default function AdminProductsPage() {
         </Link>
       </div>
 
+      {fetched && rows.length > 0 && (
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={t("admin.prod.search")}
+          className="mb-4 w-full max-w-sm rounded border border-aluminium bg-white px-3 py-2 text-sm text-ink outline-none focus:border-ink"
+        />
+      )}
+
       {actionError && <p className="mb-4 text-sm text-red-600">{actionError}</p>}
 
       {!fetched ? (
@@ -120,6 +145,7 @@ export default function AdminProductsPage() {
             <thead>
               <tr className="border-b border-aluminium text-left text-xs uppercase tracking-wide text-aluminium-dark">
                 <th className="py-2 pr-4">{t("admin.prod.col.name")}</th>
+                <th className="py-2 pr-4">{t("admin.prod.col.sku")}</th>
                 <th className="py-2 pr-4">{t("admin.prod.col.category")}</th>
                 <th className="py-2 pr-4 text-center">{t("admin.prod.col.variants")}</th>
                 <th className="py-2 pr-4">{t("admin.prod.col.status")}</th>
@@ -130,6 +156,9 @@ export default function AdminProductsPage() {
               {sortedRows.map((r) => (
                 <tr key={r.id} className="border-b border-neutral-fill">
                   <td className="py-2 pr-4 font-medium text-ink">{localizedName(r, locale)}</td>
+                  <td className="py-2 pr-4 font-mono text-xs text-aluminium-dark">
+                    {realRefs(r).join(", ") || "—"}
+                  </td>
                   <td className="py-2 pr-4 text-aluminium-dark">{catName(r.category)}</td>
                   <td className="py-2 pr-4 text-center tabular-nums">{r.product_variants?.length ?? 0}</td>
                   <td className="py-2 pr-4">
