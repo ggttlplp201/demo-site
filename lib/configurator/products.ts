@@ -68,7 +68,6 @@ export const CONFIGURABLE_PRODUCTS: Record<string, ProductMeta> = {
 
   "sample-door-frame":   { ref: "sample-door-frame",   name: "Door w/ Frame",     category: "door",     sample: true, modelUrl: "/models/door_with_frame.glb",         realDimsMm: { w: 900,  h: 2100, d: 150 }, allowedSurfaces: ["floor"] },
   "sample-metal-door":   { ref: "sample-metal-door",   name: "Metal Windowed Door", category: "door",   sample: true, modelUrl: "/models/modern_metal_windowed_door.glb", modelRotY: Math.PI / 2, realDimsMm: { w: 900, h: 2100, d: 150 }, allowedSurfaces: ["floor"] },
-  "sample-fire-doors":   { ref: "sample-fire-doors",   name: "Fire Escape Doors", category: "door-double", sample: true, modelUrl: "/models/fire_escape__exit_doors.glb", realDimsMm: { w: 1800, h: 2100, d: 150 }, allowedSurfaces: ["floor"] },
   "sample-shoe-cabinet": { ref: "sample-shoe-cabinet", name: "Shoe Cabinet",      category: "cabinet",  sample: true, modelUrl: "/models/shoe_cabinet.glb",            realDimsMm: { w: 900,  h: 1000, d: 350 }, allowedSurfaces: ["floor"] },
   "sample-wardrobe":     { ref: "sample-wardrobe",     name: "Wardrobe",          category: "wardrobe", sample: true, modelUrl: "/models/wardrobe.glb",                realDimsMm: { w: 1200, h: 2000, d: 600 }, allowedSurfaces: ["floor"] },
   "sample-dresser":      { ref: "sample-dresser",      name: "Modern Dresser",    category: "dresser",  sample: true, modelUrl: "/models/dresser_modern_light_wood.glb", realDimsMm: { w: 1700, h: 982,  d: 533 }, allowedSurfaces: ["floor"] },
