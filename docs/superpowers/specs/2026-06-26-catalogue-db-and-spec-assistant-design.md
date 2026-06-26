@@ -39,7 +39,9 @@ The phases are dependent: C's auto-match is only as good as the catalogue's spec
 
 ## Phase A — Catalogue migration (detailed)
 
-### Data model — `supabase/migrations/0004_catalogue.sql`
+### Data model — `supabase/migrations/0005_catalogue.sql`
+
+> Note: numbered 0005 because the configurator project already holds `0004_render_jobs.sql` on main.
 
 - **categories** — `id text PK, name, name_en, name_zh text not null, sort_order int default 0`.
 - **products** — core queryable columns + jsonb for rich nested blocks:
@@ -89,7 +91,7 @@ Node script using the service-role key (read from a local, uncommitted env var �
 
 ## Phase B — Admin product management (outline; detailed at its cycle)
 
-- **RPCs** (`0005_catalogue_writes.sql`, SECURITY DEFINER, `is_manager()`-gated): `upsert_product(payload jsonb)`, `import_products(rows jsonb) returns jsonb` (transactional bulk, per-row result), `set_product_status(id, status)`.
+- **RPCs** (`0006_catalogue_writes.sql`, SECURITY DEFINER, `is_manager()`-gated): `upsert_product(payload jsonb)`, `import_products(rows jsonb) returns jsonb` (transactional bulk, per-row result), `set_product_status(id, status)`.
 - **Libs (TDD):** `lib/productImport.ts` (CSV text → validated rows, group-by-slug → variants, EU-standard columns → `compliance` jsonb, comma-split images, lean-core validation with per-row errors), `lib/slug.ts` (name → kebab slug, dedupe).
 - **UI** (`/admin/products`): product list (all incl. retired) with Add / Bulk upload / Edit / Retire-Restore; single add/edit form (lean-core + optional); bulk flow upload → preview (OK ✓ / errors ✗) → confirm → import → summary; downloadable CSV template.
 - On write, revalidate the catalogue (path/tag) so new/edited cards go live.
