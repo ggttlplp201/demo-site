@@ -151,6 +151,12 @@ function CategoryBar({ activeId }: { activeId: string | null }) {
         {t("nav.downloads")}
       </Link>
       <Link
+        href="/design"
+        className="flex items-center gap-[5px] px-[14px] py-[6px] text-[14.5px] font-medium text-[#DA1E28] whitespace-nowrap rounded transition-colors hover:bg-red-50"
+      >
+        {t("design.nav")}
+      </Link>
+      <Link
         href="/configurator"
         className="flex items-center gap-[5px] px-[14px] py-[6px] text-[14.5px] font-medium text-emerald-700 whitespace-nowrap rounded transition-colors hover:bg-emerald-50"
       >
@@ -228,6 +234,15 @@ function MobileMenu({
             >
               <DownloadIcon />
               {t("nav.downloads")}
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/design"
+              onClick={onClose}
+              className="flex items-center gap-2 px-6 min-h-[44px] text-sm font-medium text-[#DA1E28] hover:bg-red-50 border-t border-hairline"
+            >
+              {t("design.nav")}
             </Link>
           </li>
           <li>

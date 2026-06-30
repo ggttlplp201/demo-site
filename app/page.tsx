@@ -171,6 +171,26 @@ function HeroSection() {
             {t("home.cta.browse")}
           </Link>
           <Link
+            href="/design"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              height: "52px",
+              padding: "0 28px",
+              background: "#17181C",
+              color: "#fff",
+              border: "none",
+              borderRadius: "4px",
+              fontSize: "15px",
+              fontWeight: 600,
+              textDecoration: "none",
+              transition: "background 0.15s",
+            }}
+            className="hover:!bg-black"
+          >
+            {t("design.hero.cta")}
+          </Link>
+          <Link
             href="/downloads"
             style={{
               display: "inline-flex",
